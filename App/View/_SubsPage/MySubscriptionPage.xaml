@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ISSProject"
+             x:Class="ISSProject.MySubscriptionPage"
+             x:DataType="local:MySubscriptionPage">
+        
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" Margin="4,0,0,0">
+            <Label Text="{Binding ChannelName}"  FontSize = "Large" HorizontalOptions="Center" Margin ="0,0,0,70"/>
+            <Label Text="Description:" FontSize="Medium"/>
+            <Label Text="{Binding Description}"  FontSize = "Medium"/>
+            <StackLayout Orientation="Horizontal" Margin="0,40,0,10">
+                <Button Text="Change Subscription" Clicked="ChangeSubscriptionButton_Clicked" Margin ="0,0,2,0" IsVisible="{Binding IsSubscribed}"/>
+                <Button Text="Cancel Subscription" Clicked="CancelSubscriptionButton_Clicked" Margin ="0,0,2,0" IsVisible="{Binding IsSubscribed}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="0,40,0,10">
+                <Label x:Name="subscriptionExpirationLabel" Text="{Binding ExpirationText}" FontSize = "Medium" VerticalOptions="Center" />
+                <Button Text="Subscribe Now" Clicked="SubscribeButton_Clicked" Margin ="10,0,2,0" VerticalOptions="Center" />
+            </StackLayout>
+            <Button Text="Back to Subscriptions" Clicked="BackToSubscriptionsButton_Clicked" Margin="0,0,2,0" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
