@@ -1,0 +1,64 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ISSProject"
+             x:Class="ISSProject.SubscriptionsPage"
+             x:DataType="local:SubscriptionsPage">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="SubscriptionTemplate">
+            <ViewCell>
+                <StackLayout Orientation="Horizontal" Padding="10,0,0,0"> <!-- Increased padding here -->
+                    <Label Text="{Binding}" FontSize="Small" TextColor="White" VerticalOptions="Center" />
+                    <Button Text="Info" FontSize="Small" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="Center"
+                            Clicked="Clicked"/> <!-- Here's the change -->
+                </StackLayout>
+            </ViewCell>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#42047e" Offset="0.0" />
+            <GradientStop Color="#07f49e" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <StackLayout VerticalOptions="Center" Margin="30" Padding="50">
+        <Label Text="Subscriptions" FontSize="Large" TextColor="White" HorizontalOptions="Center" />
+        <BoxView HeightRequest="80" BackgroundColor="Transparent"/>
+
+        <Label Text="Monthly" FontSize="Medium" TextColor="White" HorizontalOptions="Center" Margin="0,0,0,20"/>
+        <StackLayout Padding="10"> <!-- Add padding to the outer StackLayout -->
+            <!-- Iterate over MonthlySubscriptions manually -->
+            <StackLayout BindableLayout.ItemsSource="{Binding MonthlySubscriptions}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
+                            <Label Text="{Binding}" FontSize="Small" TextColor="White" VerticalOptions="Center" />
+                            <Button Text="Info" FontSize="Small" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="Center"
+                                    Clicked="Clicked"/> <!-- Here's the change -->
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </StackLayout>
+
+        <Label Text="Yearly" FontSize="Medium" TextColor="White" HorizontalOptions="Center" Margin="0,20,0,20"/>
+        <StackLayout Padding="10"> <!-- Add padding to the outer StackLayout -->
+            <!-- Iterate over YearlySubscriptions manually -->
+            <StackLayout BindableLayout.ItemsSource="{Binding YearlySubscriptions}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
+                            <Label Text="{Binding}" FontSize="Small" TextColor="White" VerticalOptions="Center" />
+                            <Button Text="Info" FontSize="Small" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="Center"
+                                    Clicked="Clicked"/> <!-- Here's the change -->
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </StackLayout>
+        
+    </StackLayout>
+
+</ContentPage>

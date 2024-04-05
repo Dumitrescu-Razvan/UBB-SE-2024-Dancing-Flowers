@@ -1,0 +1,10 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:issproject="clr-namespace:ISSProject"
+             x:Class="ISSProject.SongDetailsPage"
+             x:DataType="issproject:SongDetailsPage">
+    <StackLayout>
+        <Label Text="{Binding SelectedSong}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+        <Button Text="Back" Clicked="BackButton_Clicked" HorizontalOptions="CenterAndExpand" />
+    </StackLayout>
+</ContentPage>

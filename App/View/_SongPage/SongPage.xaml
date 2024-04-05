@@ -1,0 +1,45 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ISSProject"
+             x:Class="ISSProject.SongPage"
+             x:DataType="local:SongPage">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="SongTemplate">
+            <ViewCell>
+                <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
+                    <Label Text="{Binding}" FontSize="Small" TextColor="White" VerticalOptions="Center" />
+                    <Button Text="Info" FontSize="Small" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="Center"
+                            Clicked="Clicked"/>
+                </StackLayout>
+            </ViewCell>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#42047e" Offset="0.0" />
+            <GradientStop Color="#07f49e" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <StackLayout VerticalOptions="Center" Margin="30" Padding="50">
+        <Label Text="Songs" FontSize="Large" TextColor="White" HorizontalOptions="Center" />
+        <BoxView HeightRequest="80" BackgroundColor="Transparent"/>
+
+        <StackLayout Padding="10">
+            <StackLayout BindableLayout.ItemsSource="{Binding Songs}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
+                            <Label Text="{Binding}" FontSize="Small" TextColor="White" VerticalOptions="Center" />
+                            <Button Text="Info" FontSize="Small" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="Center"
+                                    Clicked="Clicked"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

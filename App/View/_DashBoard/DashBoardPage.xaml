@@ -1,0 +1,48 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ISSProject.DashBoardPage">
+    <StackLayout VerticalOptions="CenterAndExpand">
+
+        <!-- Search Bar -->
+        <Entry Placeholder="Search..." TextChanged="Search_TextChanged" />
+
+        
+        <!-- Info Boxes -->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Frame>
+                <StackLayout>
+                <Label Text="Revenue from Ads" HorizontalOptions="CenterAndExpand" />
+                <Label x:Name="revenueLabel" HorizontalOptions="CenterAndExpand" />
+                </StackLayout>
+            </Frame>
+            <Frame>
+                <StackLayout>
+                <Label Text="Monthly Streams" HorizontalOptions="CenterAndExpand" />
+                <Label x:Name="streamsLabel" HorizontalOptions="CenterAndExpand" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+
+        <!-- Graph -->
+        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="200" BackgroundColor="LightGray" />
+
+        <!-- List of Artists -->
+        <ScrollView HeightRequest="200">
+            <ListView x:Name="artistsListView" ItemSelected="ArtistsListView_ItemSelected"/>
+        </ScrollView>
+
+
+        <Frame>
+            <StackLayout>
+            <Label Text="Copyright Claims" HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="claimsLabel" HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+        </Frame>
+    
+        <!-- Buttons -->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,10,0,10">
+            <Button Text="Buy More Ads" Clicked="BuyAds_Clicked" Margin="2"/>
+            <Button Text="Take Down Request" Clicked="TakeDown_Clicked" Margin="2"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
