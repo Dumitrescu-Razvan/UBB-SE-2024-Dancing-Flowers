@@ -1,51 +1,54 @@
-public class PayPal : IPayment
+namespace App.Domain
 {
-    private string Email { get; set; }
-    private float Balance { get; set; }
-
-    public PayPal(string email)
+    public class PayPal : App
     {
-        (bool validEmail, string message) = IsValidEmail(email);
-        if (validEmail)
+        private string Email { get; set; }
+        private float Balance { get; set; }
+
+        public PayPal(string email)
         {
+            (bool validEmail, string message) = IsValidEmail(email);
+            if (validEmail)
+            {
                 this.Email = email;
+            }
+            else
+            {
+                throw new Exception(message);
+            }
+
         }
-        else
+        public static (bool, string) IsValidEmail(string email)
         {
-            throw new Exception(message);
+            string emailPattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
+            if (!Regex.IsMatch(email, emailPattern))
+            {
+                return (false, "Invalid Email");
+            }
+
+            return (true, "Valid Email");
         }
 
-    }
-    public static (bool, string) IsValidEmail(string email)
-    {
-        string emailPattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
-        if (!Regex.IsMatch(email, emailPattern))
+        public void Pay(float amount)
         {
-            return (false, "Invalid Email");
+            if (amount > this.Balance)
+            {
+                throw new Exception("Insufficient funds");
+            }
+            this.Balance -= amount;
+
         }
 
-        return (true, "Valid Email");
-    }
-
-    public void Pay(float amount)
-    {
-        if (amount > this.Balance)
+        public void AddFunds(float amount)
         {
-            throw new Exception("Insufficient funds");
+            this.Balance += amount;
         }
-        this.Balance -= amount;
-        
+
+        public void getBalance()
+        {
+            return this.Balance;
+
+        }
+
     }
-
-    public void AddFunds(float amount)
-    {
-        this.Balance += amount;
-    }
-
-    public void getBalance()
-    {
-        return this.Balance;
-    }
-
-
 }
