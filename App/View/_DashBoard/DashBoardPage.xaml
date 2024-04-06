@@ -1,48 +1,53 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ISSProject.DashBoardPage">
-    <StackLayout VerticalOptions="CenterAndExpand">
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+             xmlns:local="clr-namespace:ISSProject"
+             x:Class="ISSProject.DashBoardPage"
+             x:DataType="local:DashBoardPage">
+    <StackLayout VerticalOptions="FillAndExpand">
 
-        <!-- Search Bar -->
-        <Entry Placeholder="Search..." TextChanged="Search_TextChanged" />
+        <!-- SkiaSharp Canvas for Revenue Chart -->
+        <skia:SKCanvasView
+                           PaintSurface="OnPaintSurface"
+                           VerticalOptions="FillAndExpand"/>
 
-        
-        <!-- Info Boxes -->
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-            <Frame>
-                <StackLayout>
-                <Label Text="Revenue from Ads" HorizontalOptions="CenterAndExpand" />
-                <Label x:Name="revenueLabel" HorizontalOptions="CenterAndExpand" />
-                </StackLayout>
-            </Frame>
-            <Frame>
-                <StackLayout>
-                <Label Text="Monthly Streams" HorizontalOptions="CenterAndExpand" />
-                <Label x:Name="streamsLabel" HorizontalOptions="CenterAndExpand" />
-                </StackLayout>
-            </Frame>
+        <!-- Streams Label -->
+        <Label Text="Streams:" VerticalOptions="Start" HorizontalOptions="Center"/>
+        <StackLayout BindableLayout.ItemsSource="{Binding StreamsLabelText}" VerticalOptions="Start" HorizontalOptions="Center">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding}" VerticalOptions="Start" HorizontalOptions="Center"/>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
         </StackLayout>
 
-        <!-- Graph -->
-        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="200" BackgroundColor="LightGray" />
+        <!-- Claims Label -->
+        <Label Text="Claims:" VerticalOptions="Start" HorizontalOptions="Center"/>
+        <StackLayout BindableLayout.ItemsSource="{Binding ClaimsLabelText}" VerticalOptions="Start" HorizontalOptions="Center">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding}" VerticalOptions="Start" HorizontalOptions="Center"/>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
 
-        <!-- List of Artists -->
-        <ScrollView HeightRequest="200">
-            <ListView x:Name="artistsListView" ItemSelected="ArtistsListView_ItemSelected"/>
-        </ScrollView>
+        <!-- Artists List -->
+        <ListView ItemsSource="{Binding Artists}" VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label Text="{Binding}" VerticalOptions="Start" HorizontalOptions="Center"/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
-
-        <Frame>
-            <StackLayout>
-            <Label Text="Copyright Claims" HorizontalOptions="CenterAndExpand" />
-            <Label x:Name="claimsLabel" HorizontalOptions="CenterAndExpand"/>
-            </StackLayout>
-        </Frame>
-    
         <!-- Buttons -->
-        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,10,0,10">
-            <Button Text="Buy More Ads" Clicked="BuyAds_Clicked" Margin="2"/>
-            <Button Text="Take Down Request" Clicked="TakeDown_Clicked" Margin="2"/>
+        <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
+            <Button Text="Buy More Ads" Clicked="BuyAds_Clicked" Margin="5"/>
+            <Button Text="Take Down Request" Clicked="TakeDown_Clicked" Margin="5"/>
         </StackLayout>
+
     </StackLayout>
 </ContentPage>

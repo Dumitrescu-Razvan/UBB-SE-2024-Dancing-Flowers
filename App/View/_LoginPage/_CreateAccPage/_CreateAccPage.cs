@@ -2,10 +2,11 @@ namespace ISSProject
 {
     public partial class CreateAccPage : ContentPage
     {
-        private string email = new string("");
-        private string username = new string("");
-        private string password = new string("");
-        private string confirmPassword = new string("");
+        private string email { get; set;} = new string("");
+        private string username { get; set;} = new string("");
+        private string password { get; set;} = new string("");
+        private string confirmPassword { get; set;} = new string("");
+        
         public CreateAccPage()
         {
             InitializeComponent();

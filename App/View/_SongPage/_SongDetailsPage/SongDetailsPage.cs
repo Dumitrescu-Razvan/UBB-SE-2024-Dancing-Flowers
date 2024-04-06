@@ -2,13 +2,27 @@ namespace ISSProject
 {
     public partial class SongDetailsPage : ContentPage
     {
-        public string SelectedSong { get; set; }
+        
+        private string? _selectedSong;
+
+        public string? SelectedSong
+        {
+            get { return _selectedSong; }
+            set
+            {
+                if (_selectedSong != value)
+                {
+                    _selectedSong = value;
+                    OnPropertyChanged(nameof(SelectedSong));
+                }
+            }
+        }
 
         public SongDetailsPage(string selectedSong)
         {
             InitializeComponent();
-            SelectedSong = selectedSong;
             BindingContext = this;
+            SelectedSong = selectedSong;
         }
 
         private async void BackButton_Clicked(object sender, EventArgs e)

@@ -1,6 +1,8 @@
-﻿namespace ISSProject;
+﻿using System.ComponentModel;
 
-public partial class App : Application
+namespace ISSProject;
+
+public partial class App : Application, INotifyPropertyChanged
 {
     public App()
 	{

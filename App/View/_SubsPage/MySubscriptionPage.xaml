@@ -16,7 +16,7 @@
             </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="0,40,0,10">
                 <Label x:Name="subscriptionExpirationLabel" Text="{Binding ExpirationText}" FontSize = "Medium" VerticalOptions="Center" />
-                <Button Text="Subscribe Now" Clicked="SubscribeButton_Clicked" Margin ="10,0,2,0" VerticalOptions="Center" />
+                <Button x:Name="subscriptionChangeButton" Text="{Binding ChangeTextButton}" Clicked="SubscribeButton_Clicked" Margin ="10,0,2,0" VerticalOptions="Center" />
             </StackLayout>
             <Button Text="Back to Subscriptions" Clicked="BackToSubscriptionsButton_Clicked" Margin="0,0,2,0" />
         </StackLayout>

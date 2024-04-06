@@ -5,21 +5,6 @@ namespace ISSProject
     public partial class MySubscriptionPage : ContentPage, INotifyPropertyChanged
     {
         private SubscriptionManager _subscriptionManager;
-        public new event PropertyChangedEventHandler? PropertyChanged;
-        // Bindable properties for channel name, description, and subscription status
-        private string _channelName = "Music Channel";
-        public string ChannelName
-        {
-            get { return _channelName; }
-            set
-            {
-                if (_channelName != value)
-                {
-                    _channelName = value;
-                    OnPropertyChanged(nameof(ChannelName));
-                }
-            }
-        }
 
         private string _description = "Enjoy the latest music tracks!";
         public string Description
@@ -35,7 +20,7 @@ namespace ISSProject
             }
         }
 
-        private string ? _expirationText;
+        private string? _expirationText;
         public string ExpirationText
         {
             get { return _expirationText ?? string.Empty; }
@@ -45,6 +30,20 @@ namespace ISSProject
                 {
                     _expirationText = value;
                     OnPropertyChanged(nameof(ExpirationText));
+                }
+            }
+        }
+
+        private string? _changeTextButton;
+        public string ChangeTextButton
+        {
+            get { return _changeTextButton ?? string.Empty; }
+            set
+            {
+                if (_changeTextButton != value)
+                {
+                    _changeTextButton = value;
+                    OnPropertyChanged(nameof(ChangeTextButton));
                 }
             }
         }
@@ -62,17 +61,32 @@ namespace ISSProject
                 }
             }
         }
+        // Bindable properties for channel name, description, and subscription status
+        private string _channelName = "Music Channel";
+        public string ChannelName
+        {
+            get { return _channelName; }
+            set
+            {
+                if (_channelName != value)
+                {
+                    _channelName = value;
+                    OnPropertyChanged(nameof(ChannelName));
+                }
+            }
+        }
+
 
         public MySubscriptionPage(string subscriptionName)
         {
             InitializeComponent();
-            ChannelName = subscriptionName;
-            _subscriptionManager = new SubscriptionManager();
 
             // Initialize subscription manager
+            _subscriptionManager = new SubscriptionManager();
 
-            // Set the data context to this page
-            this.BindingContext = this;
+            BindingContext = this;
+
+            ChannelName = subscriptionName;
 
             // Set initial subscription status
             IsSubscribed = _subscriptionManager.IsSubscribed;
@@ -118,16 +132,13 @@ namespace ISSProject
             if (_subscriptionManager.IsSubscribed)
             {
                 ExpirationText = $"Subscription Expires: {_subscriptionManager.ExpirationDate:dd/MM/yyyy}";
+                ChangeTextButton = "Change";
             }
             else
             {
-                ExpirationText = "Subscription Expires: Not Subscribed";
+                ExpirationText = "Not Subscribed";
+                ChangeTextButton = "Subscribe";
             }
-        }
-
-        protected new void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         private async void BackToSubscriptionsButton_Clicked(object sender, EventArgs e)
         {
