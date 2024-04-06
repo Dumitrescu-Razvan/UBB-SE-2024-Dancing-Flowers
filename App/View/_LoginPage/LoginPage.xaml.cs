@@ -6,13 +6,15 @@ namespace ISSProject
         {
             InitializeComponent();
         }
+        private string? _username { get; set;} = new string("");
+        private string? _password { get; set;} = new string("");
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
-            string username = usernameEntry.Text;
-            string password = passwordEntry.Text;
+            _username = usernameEntry.Text;
+            _password = passwordEntry.Text;
 
-            if (IsValidLogin(username, password))
+            if (IsValidLogin(_username, _password))
             {
                 // Navigate to the AppShell page using the main navigation page
                 if (Application.Current != null && Application.Current.MainPage != null)
@@ -30,10 +32,10 @@ namespace ISSProject
         }
 
         // Dummy validation method, replace with your actual validation logic
-        private bool IsValidLogin(string username, string password)
+        private bool IsValidLogin(string _username, string _password)
         {
             // Dummy check, replace with your actual validation logic
-            return (username == "admin" && password == "password");
+            return (_username == "admin" && _password == "password");
         }
         private async void CreateAccButton_Clicked(object sender, EventArgs e)
         {

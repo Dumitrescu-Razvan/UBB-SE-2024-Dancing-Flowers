@@ -6,6 +6,7 @@ namespace ISSProject
     {
         public ObservableCollection<string> Songs { get; } = new ObservableCollection<string>();
 
+
         // Property to track button clicks
         public bool IsClicked { get; set; }
 
