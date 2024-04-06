@@ -1,66 +1,51 @@
 public class PayPal : IPayment
 {
-    private string Email{get; set;}
+    private string Email { get; set; }
+    private float Balance { get; set; }
 
     public PayPal(string email)
     {
         (bool validEmail, string message) = IsValidEmail(email);
         if (validEmail)
         {
-            this.Email = email;
+                this.Email = email;
         }
         else
         {
             throw new Exception(message);
         }
-        
-    }
 
-    public PayPal(string email, int currentBalance) : base(currentBalance)
-    {
-        (bool validEmail, string message) = IsValidEmail(email);
-        if (validEmail)
-        {
-            this.Email = email;
-        }
-        else
-        {
-            throw new Exception(message);
-        }
     }
-    
-    public override string ToString()
-    {
-        return "PayPal{" +
-               "Email='" + Email + '\'' +
-               '}';
-    }
-    
     public static (bool, string) IsValidEmail(string email)
     {
-        // check that the email does not contain any spaces
-        if (email.Contains(' '))
+        string emailPattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
+        if (!Regex.IsMatch(email, emailPattern))
         {
-            return (false, "The Email cannot contain spaces");
-        }
-        // the email cannot be less than 5 characters because "@.domain" has at least 4 characters
-        if (email.Length < 5)
-        {
-            return (false, "The Email is too short");
-        }
-        // the email must contain an @
-        if (!email.Contains("@"))
-        {
-            return (false, "The Email does not contain @");
-        }
-        // the email must contain a . after the @
-        if (email.LastIndexOf(".") < email.LastIndexOf("@"))
-        {
-            return (false, "The Email does not have a domain extension");
+            return (false, "Invalid Email");
         }
 
         return (true, "Valid Email");
     }
-    
-    
+
+    public void Pay(float amount)
+    {
+        if (amount > this.Balance)
+        {
+            throw new Exception("Insufficient funds");
+        }
+        this.Balance -= amount;
+        
+    }
+
+    public void AddFunds(float amount)
+    {
+        this.Balance += amount;
+    }
+
+    public void getBalance()
+    {
+        return this.Balance;
+    }
+
+
 }
