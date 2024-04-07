@@ -1,9 +1,9 @@
 namespace App.Domain{
     public class Card : IPayment{
-        private string CardNumber{get;set;};
-        private string Cvv{get;set;};
-        private string ExpirationDate{get;set;};
-        private float Balance{get;set;};
+        private string CardNumber{get;set;} = new string();
+        private string Cvv{get;set;} = new string();
+        private string ExpirationDate{get;set;} = new string();
+        private float Balance{get;set;} = new float();
 
         public Card(string cardNumber, string cvv, string expirationDate, int currentBalance) : base(currentBalance){
             CardNumber = cardNumber;

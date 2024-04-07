@@ -1,8 +1,10 @@
 namespace App.Domain{
     public class Playlist{
         private List<Song> songs{get; set;} = new List<Song>();
-        public String Name { get; set; }
-        public Playlist(string name) => Name = name;
+        public String Name { get; set; } = new String();
+        public Playlist(string name){
+            this.Name = name;
+        }
         
         public bool addSong(Song song) {
             this.songs.Add(song);

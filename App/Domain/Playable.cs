@@ -1,9 +1,8 @@
-
 namespace App.Domain{
     public abstract class Playable{
-        public Guid Id { get; set; }
-        public int Duration { get; set; }
-        public int TimesPlayed { get; set; }
+        public Guid Id { get; set; } = new Guid();
+        public int Duration { get; set; } = new int();
+        public int TimesPlayed { get; set; } = new int();
         protected Playable(){
             this.Duration = 0;
             this.TimesPlayed = 0;
