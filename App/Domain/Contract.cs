@@ -2,12 +2,14 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace app.Domain
+namespace App.Domain
 {
-   public class Contract
+    public class Contract
     {
-       public Guid guid { get; }
+        public Guid guid { get; }
+        private List<Client> clients { get; set; } = new List<Client>();
 
+        private Song song { get; set; } = new Song();
         Contract(Guid guid)
         {
             this.guid = guid;

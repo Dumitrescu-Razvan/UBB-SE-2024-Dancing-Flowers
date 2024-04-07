@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace app.Domain
+namespace App.Domain
 {
 public abstract class Account
 {
@@ -24,6 +24,8 @@ public abstract class Account
     protected private string salt { get; set; } = new string("");
     protected private string email { get; set; } = new string("");
     protected private string phone { get; set; } = new string("");
+
+    protected private ?List<IPayment> payments { get; set; } = new List<IPayments>();
 
     //Constructor
     public Account(string username, string password, string email, string phone, string salt, Guid guid)
@@ -133,6 +135,29 @@ public abstract class Account
                 builder.Append(hashBytes[i].ToString("x2"));
             }
             return builder.ToString();
+        }
+    }
+
+    // Method to add payment
+    public bool addPayment(IPayment payment)
+    {
+        /*
+         * @param payment: IPayment
+         * @return bool
+         *
+         * Method to add payment
+         * Adds the payment to the list of payments
+         *
+         * Returns true if the payment is added successfully, else false
+         *
+         */
+        if (payments.Add(payment))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

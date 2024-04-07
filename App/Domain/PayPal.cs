@@ -2,8 +2,8 @@ namespace App.Domain
 {
     public class PayPal : App
     {
-        private string Email { get; set; }
-        private float Balance { get; set; }
+        private string Email { get; set; } = new string();
+        private float Balance { get; set; } = new float();
 
         public PayPal(string email)
         {

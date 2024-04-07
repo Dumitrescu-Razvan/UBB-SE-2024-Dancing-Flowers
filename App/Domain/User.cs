@@ -1,4 +1,4 @@
-namespace app.Domain
+namespace App.Domain
 {
     public class User : Account
     {

@@ -1,6 +1,6 @@
 namespace App.Domain {
     public class Ad : Playable {
-        public int Clicks{get;set;}
+        public int Clicks{get;set;} = new int();
         public Ad() : base() {
             this.Clicks = 0;
         }
