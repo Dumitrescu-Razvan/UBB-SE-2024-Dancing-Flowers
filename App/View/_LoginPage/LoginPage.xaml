@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ISSProject.LoginPage">
 
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
 
     <ContentPage.Background>
         <!-- Define your LinearGradientBrush for the background -->
@@ -30,15 +33,15 @@
                     <BoxView HeightRequest="80" BackgroundColor="Transparent"/>
 
                     <!-- Entries -->
-                    <Entry x:Name="usernameEntry" Placeholder="Username" WidthRequest="200" HorizontalOptions="FillAndExpand" Margin="0,6,0,0"/>
-                    <Entry x:Name="passwordEntry" Placeholder="Password" IsPassword="True" WidthRequest="200" HorizontalOptions="FillAndExpand" Margin="0,6,0,0"/>
+                    <Entry x:Name="usernameEntry" Placeholder="Username" WidthRequest="200" HorizontalOptions="FillAndExpand" Margin="0,6,0,0" TextColor = "Black"/>
+                    <Entry x:Name="passwordEntry" Placeholder="Password" IsPassword="True" WidthRequest="200" HorizontalOptions="FillAndExpand" Margin="0,6,0,0" TextColor = "Black"/>
 
                     <!-- Spacing between entries and button -->
                     <BoxView HeightRequest="30" BackgroundColor="Transparent"/>
 
                     <!-- Button -->
                     <Button Text="Login" Clicked="LoginButton_Clicked" WidthRequest="200" HorizontalOptions="FillAndExpand"/>
-                    <Label Text="Don't have an account?" HorizontalOptions="Center" Margin="0,20,0,0">
+                    <Label Text="Don't have an account?" HorizontalOptions="Center" Margin="0,20,0,0" TextColor = "#6E6E6E">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="CreateAccButton_Clicked"/>
                         </Label.GestureRecognizers>

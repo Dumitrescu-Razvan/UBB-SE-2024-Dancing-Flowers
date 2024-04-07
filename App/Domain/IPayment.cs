@@ -1,8 +1,12 @@
-public interface IPayment
+namespace App.Domain
 {
-    float Balance { get; set; }
+    public interface IPayment
+    {
+        float Balance { get; set; } = new float();
 
-    public void Pay(float amount);
-    public void AddFunds(float amount);
-    public void GetBalance();
+        public void Pay(float amount);
+        public void AddFunds(float amount);
+        public void GetBalance();
+    }
+    
 }
