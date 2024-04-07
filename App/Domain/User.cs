@@ -6,6 +6,7 @@ namespace app.Domain
         protected private int age { get; set; } = new int();
         protected private string subscriptionTier { get; set; } = new string();
         protected private List<Playlist> playlists { get; set; } = new List<Playlist>();
+        protected private bool isAdmin { get; set; } = new bool();
 
         public User(string username, string password, string email, string phone, string zone, string salt, string location, int age, string subscriptionTier, Guid guid) : base(username, password, email, phone, zone, salt, guid)
         {
