@@ -1,12 +1,23 @@
+using System;
+
 namespace App.Domain
 {
     public class Playlist
     {
-        private List<Song> songs { get; set; } = new List<Song>();
-        public String Name { get; set; } = new String();
+        private int id { get; }
+        private List<Song> songs { get; set; };
+        private string name { get; set; } = new string();
+
         public Playlist(string name)
         {
-            this.Name = name;
+            this.name = name;
+        }
+
+        public Playlist(int id, int name, List<Song> songs)
+        {
+            this.id = id;
+            this.name = name;
+            this.songs = songs;
         }
 
         public bool addSong(Song song)

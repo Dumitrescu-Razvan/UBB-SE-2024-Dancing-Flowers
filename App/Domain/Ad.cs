@@ -1,26 +1,25 @@
+using System;
+
 namespace App.Domain
 {
     public class Ad : Playable
     {
-        public int Clicks { get; set; } = new int();
+        private int clicks { get; set; } = new int();
+
         public Ad() : base()
         {
-            this.Clicks = 0;
+            this.clicks = 0;
         }
 
         public Ad(int id, int duration, int timesPlayed, int clicks) : base(id, duration, timesPlayed)
         {
-            /*
-             * new constructor for Ad which takes in id, duration and timesPlayed as well for base class
-             */
-            this.Clicks = clicks;
+            this.clicks = clicks;
         }
-        public void Clicked()
+
+        public void clicked()
         {
-            this.Clicks++;
+            this.clicks++;
         }
-        public void Skip()
-        {
-        }
+
     }
 }
