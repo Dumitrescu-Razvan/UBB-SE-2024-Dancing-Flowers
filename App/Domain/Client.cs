@@ -10,7 +10,7 @@ namespace App.Domain
         protected private list<Ad> ads { get; set; } = new list<Ad>();
         protected private list<Contract> contracts { get; set; } = new list<Contract>();
 
-        public Client(string username, string password, string phone, string zone, string salt, string companyName, string contactEmail, string businessEmail, Guid guid) : base(username, password, contactEmail, phone, zone, salt, guid)
+        public Client(int id, string username, string password, string phone, string zone, string salt, string companyName, string contactEmail, string businessEmail) : base(id, username, password, contactEmail, phone, zone, salt)
         {
             this.companyName = companyName;
             this.contactEmail = contactEmail;
