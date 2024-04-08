@@ -1,49 +1,47 @@
+using System;
+
 namespace App.Domain
 {
     public class Song : Playable
     {
-        public String Artist { get; set; }
-        public String Album { get; set; }
-        public int Likes { get; set; }
-        public int Shares { get; set; }
-        public int Saves { get; set; }
-        public ? List<String> Restrictions { get; set; }
+        private string artist { get; set; } = new string();
+        private string album { get; set; } = new string();
+        private int likes { get; set; };
+        private int shares { get; set; }
+        private int saves { get; set; }
+        private ? List<String> restrictions { get; set; }
 
-        public Song(int id, string artist, string album, List<String> restrictions, int duration, int timesPlayed) : base(id, duration, timesPlayed)
+        public Song(string artist, string album, List<String> restrictions, int duration) : base()
         {
-            // old constructor, modified for base class. still missing parameters get initialised with 0
-            // may be useful for new songs added to the db 
-            Artist = artist;
-            Album = album;
-            Likes = 0;
-            Shares = 0;
-            Saves = 0;
-            Restrictions = restrictions;
+            this.artist = artist;
+            this.album = album;
+            this.duration = duration;
+            this.likes = 0;
+            this.shares = 0;
+            this.saves = 0;
+            this.restrictions = restrictions;
         }
 
         public Song(int id, string artist, string album, List<string> restrictions, int duration, int timesPlayed, int likes, int shares, int saves) : base(id, duration, timesPlayed)
         {
-            /*
-             * new constructor that has the other parameters, 
-             * also the base constructor now has all the parameters it needs
-             */
-            Artist = artist;
-            Album = album;
-            Likes = likes;
-            Shares = shares;
-            Saves = saves;
-            Restrictions = restrictions;
+
+            this.artist = artist;
+            this.album = album;
+            this.likes = likes;
+            this.shares = shares;
+            this.saves = saves;
+            this.restrictions = restrictions;
         }
 
-        public void Like()
+        public void like()
         {
             Likes++;
         }
-        public void Share()
+        public void share()
         {
             Shares++;
         }
-        public void Save()
+        public void save()
         {
             Saves++;
         }

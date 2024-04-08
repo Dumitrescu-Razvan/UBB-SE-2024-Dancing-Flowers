@@ -1,3 +1,5 @@
+using System;
+
 namespace App.Domain
 {
     public class User : Account

@@ -1,41 +1,27 @@
+using System;
+
 namespace App.Domain
 {
-    public class Card : IPayment
+    public class Card : Payment
     {
-        private string CardNumber { get; set; } = new string();
-        private string Cvv { get; set; } = new string();
-        private string ExpirationDate { get; set; } = new string();
-        private float Balance { get; set; } = new float();
-        private int Id { get; } = new int();
+        private string cardNumber { get; set; } = new string();
+        private string cvv { get; set; } = new string();
+        private string expirationDate { get; set; } = new string();
 
-        public Card(int id, string cardNumber, string cvv, string expirationDate, int currentBalance)
+        public Card(string cardNumber, string cvv, string expirationDate) : base()
         {
-    
-            this.CardNumber = cardNumber;
-            this.Cvv = cvv;
-            this.ExpirationDate = expirationDate;
-            this.Balance = currentBalance;
-            this.Id = id;
+            this.cardNumber = cardNumber;
+            this.cvv = cvv;
+            this.expirationDate = expirationDate;
         }
 
-        public void Pay(float amount)
+        public Card(int id, int balance, string cardNumber, string cvv, string expirationDate) : base(id, balance)
         {
-            if (amount > this.Balance)
-            {
-                throw new Exception("Insufficient funds");
-            }
-            this.Balance -= amount;
+            this.cardNumber = cardNumber;
+            this.cvv = cvv;
+            this.expirationDate = expirationDate;
         }
 
-        public void AddFunds(float amount)
-        {
-            this.Balance += amount;
-        }
-
-        public void GetBalance()
-        {
-            return this.Balance;
-        }
     }
 
 }
