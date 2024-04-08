@@ -17,7 +17,7 @@ public abstract class Account
      */
 
     // Member variables, setter and getter methods
-    public static Guid guid { get; };
+    public int id { get; }; //Modified from guid to int
 
     protected private string username { get; set; } = new string("");
     protected private string passwordHash { get; set; } = new string("");
@@ -25,10 +25,10 @@ public abstract class Account
     protected private string email { get; set; } = new string("");
     protected private string phone { get; set; } = new string("");
 
-    protected private ?List<IPayment> payments { get; set; } = new List<IPayments>();
+    protected private ? List<IPayment> payments { get; set; } = new List<IPayments>();
 
     //Constructor
-    public Account(string username, string password, string email, string phone, string salt, Guid guid)
+    public Account(int id, string username, string password, string email, string phone, string salt)
     {
         //set all the properties
         this.username = username;
@@ -136,28 +136,28 @@ public abstract class Account
             }
             return builder.ToString();
         }
-    }
 
-    // Method to add payment
-    public bool addPayment(IPayment payment)
-    {
+        // Method to add payment
+        public bool addPayment(IPayment payment)
+        {
         /*
-         * @param payment: IPayment
-         * @return bool
-         *
-         * Method to add payment
-         * Adds the payment to the list of payments
-         *
-         * Returns true if the payment is added successfully, else false
-         *
-         */
+        * @param payment: IPayment
+        * @return bool
+        *
+        * Method to add payment
+        * Adds the payment to the list of payments
+        *
+        * Returns true if the payment is added successfully, else false
+        *
+        */
         if (payments.Add(payment))
         {
             return true;
         }
         else
         {
-            return false;
+        return false;
+        }
         }
     }
 }

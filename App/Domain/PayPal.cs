@@ -1,9 +1,22 @@
 namespace App.Domain
 {
-    public class PayPal : App
+
+    /*
+     * For some reason PayPal extended App. I changed it to extend IPayment
+     * also added an ID field because it didn't have one
+     */
+    public class PayPal : IPayment
     {
         private string Email { get; set; } = new string();
         private float Balance { get; set; } = new float();
+        private int Id { get; } = new int();
+
+        public PayPal(int id, string email, float balance)
+        {
+            this.Email = email;
+            this.Balance = balance;
+            this.Id = id;
+        }
 
         public PayPal(string email)
         {

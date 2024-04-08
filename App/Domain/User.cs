@@ -8,7 +8,7 @@ namespace App.Domain
         protected private List<Playlist> playlists { get; set; } = new List<Playlist>();
         protected private bool isAdmin { get; set; } = new bool();
 
-        public User(string username, string password, string email, string phone, string zone, string salt, string location, int age, string subscriptionTier, Guid guid) : base(username, password, email, phone, zone, salt, guid)
+        public User(int id, string username, string password, string email, string phone, string zone, string salt, string location, int age, string subscriptionTier) : base(id, username, password, email, phone, zone, salt)
         {
             this.location = location;
             this.age = age;
