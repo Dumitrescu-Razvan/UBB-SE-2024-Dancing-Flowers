@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ISSProject"
+             x:Class="ISSProject.AdminPage"
+             x:DataType="local:AdminPage">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="10">
+                <!-- Users List -->
+                <Frame CornerRadius="10" HasShadow="True" Margin="5">
+                    <Frame.Background>
+                        <SolidColorBrush Color="DimGray"/>
+                    </Frame.Background>
+                    <StackLayout>
+                        <Label Text="All Users" FontSize="28" HorizontalOptions="Center"/>
+
+                        <CollectionView ItemsSource="{Binding Users}" SelectionMode="Single" Margin="2"
+                                        SelectionChanged="UserCollectionView_SelectionChanged"
+                                        >
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical"
+                                                   ItemSpacing="5" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Text="{Binding}" FontSize="21"/>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <!-- Ban and Warn Buttons -->
+                        <HorizontalStackLayout x:Name="actionButtonsLayout" HorizontalOptions="CenterAndExpand" Margin="0,20,0,0"
+                                               IsVisible="False">
+                            <Button Text="Ban" Clicked="BanButton_Clicked"/>
+                            <Button Text="Warn" Clicked="WarnButton_Clicked"/>
+                        </HorizontalStackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Admin Log -->
+                <Frame CornerRadius="10" HasShadow="True" Margin="5">
+                    <Frame.Background>
+                        <SolidColorBrush Color="DimGray"/>
+                    </Frame.Background>
+                    <StackLayout>
+                        <Label Text="Admin Log" FontSize="28" HorizontalOptions="Center"/>
+                        <CollectionView ItemsSource="{Binding AdminLog}" Margin="2">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical"
+                                                   ItemSpacing="5" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Text="{Binding}" FontSize="21" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Claims List -->
+                <Frame CornerRadius="10" HasShadow="True" Margin="5">
+                    <Frame.Background>
+                        <SolidColorBrush Color="DimGray"/>
+                    </Frame.Background>
+                    <StackLayout>
+                        <Label Text="All Claims" FontSize="28" HorizontalOptions="Center" Margin="2" />  
+                        <CollectionView ItemsSource="{Binding Claims}" SelectionMode="Single" SelectionChanged="ClaimsCollectionView_SelectionChanged" Margin="10">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical"
+                                                   ItemSpacing="5" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Text="{Binding}" FontSize="21"/>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <!-- Resolve Claim Section -->
+                        <StackLayout x:Name="resolveClaimSection" IsVisible="False" Margin="20">
+                            <Entry x:Name="resolveEntry" Placeholder="Enter decision" TextColor="White" PlaceholderColor = "White"/>
+                            <Button Text="Resolve Claim" Clicked="ResolveClaimButton_Clicked" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

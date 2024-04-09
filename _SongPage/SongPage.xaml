@@ -1,0 +1,76 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ISSProject"
+             x:Class="ISSProject.SongPage"
+             x:DataType="local:SongPage">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="SongTemplate">
+            <ViewCell>
+                <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
+                    <Label Text="{Binding}" FontSize="Small" TextColor="White" VerticalOptions="Center" />
+                    <Button Text="Info" FontSize="Small" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="Center"
+                            Clicked="SongInfo_Clicked"/>
+                </StackLayout>
+            </ViewCell>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#42047e" Offset="0.0" />
+            <GradientStop Color="#07f49e" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid Margin="20" VerticalOptions="CenterAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Section for songs -->
+        <Label Grid.Row="0" Text="Songs" FontSize="Large" TextColor="White" HorizontalOptions="Center" Margin="10"/>
+        <ScrollView Grid.Row="1"  Padding="10" BackgroundColor="#33000000">
+            <StackLayout>
+                <BoxView HeightRequest="10" BackgroundColor="Transparent"/>
+                <ListView ItemsSource="{Binding Songs}" ItemTemplate="{StaticResource SongTemplate}" BackgroundColor="Transparent"/>
+            </StackLayout>
+        </ScrollView>
+        <Label Grid.Row="2" Text="Top three Artists" FontSize="Large" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+        <!-- Section for top three artists -->
+        <StackLayout Grid.Row="3">
+            <Border HeightRequest="140" 
+                    WidthRequest="140"
+                    StrokeShape="RoundRectangle 80,80,80,80"
+                    HorizontalOptions="Center"
+                    StrokeThickness="4"
+                    Margin="2"
+                    >
+                <Image HorizontalOptions="CenterAndExpand" Source="{Binding TopThreeArtists[0]}" WidthRequest="140" HeightRequest="140" Aspect="AspectFill"/>
+            </Border>
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                <Border HeightRequest="140" 
+                    WidthRequest="140"
+                    StrokeShape="RoundRectangle 80,80,80,80"
+                    HorizontalOptions="Center"
+                    StrokeThickness="4"
+                    Margin="2">
+                    <Image Source="{Binding TopThreeArtists[1]}" WidthRequest="140" HeightRequest="140" Aspect="AspectFill"/>
+                </Border>
+                <Border HeightRequest="140" 
+                    WidthRequest="140"
+                    StrokeShape="RoundRectangle 80,80,80,80"
+                    HorizontalOptions="Center"
+                    StrokeThickness="2"
+                    Margin="2">
+                <Image Source="{Binding TopThreeArtists[2]}" WidthRequest="140" HeightRequest="140" Aspect="AspectFill"/>
+                </Border>
+            </HorizontalStackLayout>
+        </StackLayout>
+
+    </Grid>
+
+</ContentPage>

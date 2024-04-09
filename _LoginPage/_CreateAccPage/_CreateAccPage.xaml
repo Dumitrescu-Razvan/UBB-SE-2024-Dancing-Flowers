@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:issproject="clr-namespace:ISSProject"
+             x:DataType="issproject:CreateAccPage"
+             x:Class="ISSProject.CreateAccPage">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+    <ScrollView>
+        <VerticalStackLayout VerticalOptions="CenterAndExpand">
+            <Label Text="Create Account" FontSize="Large" HorizontalOptions="Center" Margin="0,20,0,0"/>
+            <HorizontalStackLayout HorizontalOptions="Center" Margin="0,20,0,0">
+                <Label Text="Are you a Business?" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <CheckBox CheckedChanged="OnCheckBoxCheckedChanged" HorizontalOptions="Center"/>
+            </HorizontalStackLayout>
+            <Entry x:Name="artistEntry" Placeholder="Artist Name" WidthRequest="200" HorizontalOptions="FillAndExpand" Margin="0,6,0,0" IsVisible="{Binding Client}"/>
+            <Entry x:Name="usernameEntry" Placeholder="Username" WidthRequest="200" HorizontalOptions="FillAndExpand" Margin="0,6,0,0"/>
+            <Entry x:Name="passwordEntry" Placeholder="Password" IsPassword="True" WidthRequest="200" HorizontalOptions="FillAndExpand" Margin="0,6,0,0"/>
+            <Entry x:Name="confirmPasswordEntry" Placeholder="Confirm Password" IsPassword="True" WidthRequest="200" HorizontalOptions="FillAndExpand" Margin="0,6,0,0"/>
+            <Entry x:Name="emailEntry" Placeholder="Email" WidthRequest="200" HorizontalOptions="FillAndExpand" Margin="0,6,0,0"/>
+            <Button Text="Create Account" Clicked="CreateAccButton_Clicked" WidthRequest="200" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Already have an account?" HorizontalOptions="Center" Margin="0,20,0,0" >
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BackButton_Clicked"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

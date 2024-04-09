@@ -1,0 +1,58 @@
+﻿<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:ISSProject"
+       x:Class="ISSProject.AppShell"
+       x:DataType="local:AppShell"
+       Shell.FlyoutBehavior="Disabled"
+       Shell.NavBarIsVisible="False">
+    <Shell.Resources>
+        <x:Array x:Key="CountryArray" Type="{x:Type x:String}">
+            <!-- List of country names here -->
+            <x:String>Afghanistan</x:String>
+            <x:String>Albania</x:String>
+            <!-- Add more countries as needed -->
+        </x:Array>
+    </Shell.Resources>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+
+    <TabBar>
+        <Tab x:Name="IsLoggedInSongs" Title="Feed">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:SongPage}"
+                Route="SongPage" />
+        </Tab>
+        <!-- Conditional visibility for "Subscriptions" page based on IsLoggedIn -->
+        <Tab x:Name="IsLoggedInSub" Title="Subscriptions">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:MySubscriptionPage}"
+                Route="MySubscriptionPage"/>
+        </Tab>
+        <!-- Conditional visibility for "Login" page based on IsLoggedIn -->
+        <Tab x:Name="IsLoggedInShow" Title="Login">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:LoginPage}"
+                Route="LoginPage" />
+        </Tab>
+        <Tab x:Name="IsAClientSub" Title="DashBoard">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:DashBoardPage}"
+                Route="DashBoardPage" />
+        </Tab>
+        <Tab x:Name="IsAClientCont" Title="Contracts">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:ContractsPage}"
+                Route="ContractsPage" />
+        </Tab>
+        <Tab x:Name="IsAdminSub" Title="Admin Panel">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:AdminPage}"
+                Route="AdminPage" />
+        </Tab>
+
+
+    </TabBar>
+
+
+</Shell>

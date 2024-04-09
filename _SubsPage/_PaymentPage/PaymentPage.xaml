@@ -1,0 +1,24 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ISSProject"
+             x:Class="ISSProject.PaymentPage"
+             x:DataType="local:PaymentPage"
+             Title="Payment Page">
+    <ContentPage.Content>
+
+        <StackLayout Padding="20" Margin="20" VerticalOptions="CenterAndExpand">
+            <Label x:Name="SubscriptionInfoLabel" Margin="0,20" />
+            <Entry Placeholder="Card Number" x:Name="CardNumberEntry"/>
+            <Entry Placeholder="Cardholder Name" x:Name="CardholderNameEntry"/>
+            <StackLayout Orientation="Horizontal" Margin="0,10">
+                <Entry Placeholder="Exp. Date (MM/YY)" x:Name="ExpirationDateEntry" HorizontalOptions="FillAndExpand"/>
+                <Entry Placeholder="CVV" x:Name="CVVEntry" WidthRequest="100"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="20">
+                <Button Text="Back" Clicked="BackButton_Clicked" HorizontalOptions="Center" Margin="2"/>
+                <Button Text="Pay" Clicked="PayButton_Clicked" HorizontalOptions="Center" Margin="2"/>
+            </StackLayout>
+            <!-- Additional UI elements can be added here -->
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
