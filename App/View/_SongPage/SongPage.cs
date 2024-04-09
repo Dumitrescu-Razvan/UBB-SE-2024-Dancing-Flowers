@@ -1,30 +1,73 @@
+using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace ISSProject
 {
-    public partial class SongPage : ContentPage
+    public partial class SongPage : ContentPage, INotifyPropertyChanged
     {
-        public ObservableCollection<string> Songs { get; } = new ObservableCollection<string>();
+        public ObservableCollection<string> Songs { get; set; }
+        public ObservableCollection<string> TopThreeArtists { get; set; }
 
-
-        // Property to track button clicks
-        public bool IsClicked { get; set; }
-
+        // Constructor
         public SongPage()
         {
             InitializeComponent();
-
-            // Set the BindingContext
+            Songs = new ObservableCollection<string>();
+            TopThreeArtists = new ObservableCollection<string>(); // Contains image URLs
+            LoadSongs();
+            LoadTopThreeArtists();
             BindingContext = this;
-
-            // Populate songs
-            Songs.Add("Song 1");
-            Songs.Add("Song 2");
-            Songs.Add("Song 3");
         }
 
-        // Event handler for button clicks
-        private async void Clicked(object sender, EventArgs e)
+        // Method to load sample songs (replace with your actual data source)
+        private void LoadSongs()
+        {
+            Songs.Add("Song 1 by Artist 1");
+            Songs.Add("Song 2 by Artist 1");
+            Songs.Add("Song 3 by Artist 2");
+            Songs.Add("Song 4 by Artist 3");
+            Songs.Add("Song 5 by Artist 3");
+            Songs.CollectionChanged += Songs_CollectionChanged;
+        }
+
+        // Method to populate the TopThreeArtists list
+        private void LoadTopThreeArtists()
+        {
+            // For demonstration purposes, assume these are image URLs
+            TopThreeArtists.Add("https://i1.sndcdn.com/artworks-OVjQCFFE8TAvXrwA-NomMbQ-t500x500.jpg");
+            TopThreeArtists.Add("https://i.scdn.co/image/ab6761610000e5eb1d8e3ecf59f556b8e4fafce8");
+            TopThreeArtists.Add("https://i.scdn.co/image/ab6761610000e5eb4293385d324db8558179afd9");
+        }
+
+        // Method to dynamically update the top three artists
+        private void UpdateTopThreeArtists()
+        {
+            // Update top three artists if needed (e.g., if artists are dynamic)
+            // For demonstration, we're not updating here
+        }
+
+        // Event handler for the Songs collection changed
+        private void Songs_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            // Update top three artists if needed
+        }
+
+        // Event handler for the button clicked (to trigger update of top 3 artists)
+        private void UpdateTopThreeButton_Clicked(object sender, EventArgs e)
+        {
+            UpdateTopThreeArtists();
+        }
+
+        // Implementation of INotifyPropertyChanged interface
+        public new event PropertyChangedEventHandler? PropertyChanged;
+        protected new void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        // Event handler for the button clicked (example)
+        private async void SongInfo_Clicked(object sender, EventArgs e)
         {
             var button = sender as Button;
             if (button != null)
