@@ -45,11 +45,12 @@ namespace ISSProject
         private void MockData()
         {
             // Mock data for revenue chart
-            RevenueChartData.Add(new DataPoint("January", 1000));
-            RevenueChartData.Add(new DataPoint("February", 1500));
-            RevenueChartData.Add(new DataPoint("March", 2000));
-            RevenueChartData.Add(new DataPoint("April", 2500));
-
+            RevenueChartData.Add(new DataPoint("Jan.", 1000));
+            RevenueChartData.Add(new DataPoint("Feb.", 1500));
+            RevenueChartData.Add(new DataPoint("Mar.", 2000));
+            RevenueChartData.Add(new DataPoint("Apr.", 2500));
+            RevenueChartData.Add(new DataPoint("Jun.", 2000));
+            RevenueChartData.Add(new DataPoint("Jul.", 500));
             StreamsLabelText.Add("Streams: 10000");
             ClaimsLabelText.Add("Claims: 10");
 
@@ -62,32 +63,78 @@ namespace ISSProject
         private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             SKCanvas canvas = e.Surface.Canvas;
-            canvas.Clear(SKColors.White);
+            canvas.Clear(SKColors.Transparent);
 
             // Define chart dimensions
             float chartWidth = e.Info.Width;
             float chartHeight = e.Info.Height;
-            float barWidth = chartWidth / RevenueChartData.Count;
+            float barWidth = chartWidth / (RevenueChartData.Count + 1); // Adding padding between bars
             float maxValue = (float)RevenueChartData.Max(dp => dp.Value);
 
             // Define paint for drawing bars
             SKPaint barPaint = new SKPaint
             {
-                Color = SKColors.Blue,
+                Color = SKColors.CornflowerBlue,
                 IsAntialias = true
             };
+
+            // Define paint for drawing line chart
+            SKPaint linePaint = new SKPaint
+            {
+                Color = SKColors.OrangeRed,
+                StrokeWidth = 10,
+                IsAntialias = true
+            };
+
+            SKPaint textPaint = new SKPaint
+            {
+                Color = SKColors.White,
+                TextSize = 35,
+                IsAntialias = true
+            };
+
+
+            // Draw labels on y-axis
+            for (int i = 0; i < 6; i++)
+            {
+                float yPos = chartHeight - 50 - (chartHeight - 100) * i / 5;
+                string label = (maxValue * i / 5).ToString("C0"); // Format label as currency
+                canvas.DrawText(label, 50, yPos + 10, textPaint);
+            }
+
+            // Draw labels on x-axis
+            for (int i = 0; i < RevenueChartData.Count; i++)
+            {
+                float xPos = 100 + (i + 1) * barWidth;
+                string label = RevenueChartData[i].Label;
+                canvas.DrawText(label, xPos - (textPaint.MeasureText(label) / 2), chartHeight - 25, textPaint);
+            }
 
             // Draw bars for each data point
             for (int i = 0; i < RevenueChartData.Count; i++)
             {
                 // Calculate bar dimensions
-                float barX = i * barWidth;
-                float barHeight = (float)(chartHeight * (RevenueChartData[i].Value / maxValue));
+                float barX = 100 + (i + 1) * barWidth;
+                float barHeight = (float)((chartHeight - 100) * (RevenueChartData[i].Value / maxValue));
 
                 // Draw bar
-                canvas.DrawRect(barX, chartHeight - barHeight, barWidth, barHeight, barPaint);
+                canvas.DrawRect(barX - (barWidth / 2), chartHeight - 50 - barHeight, barWidth, barHeight, barPaint);
+            }
+
+
+            for (int i = 0; i < RevenueChartData.Count - 1; i++)
+            {
+                float currentXPos = 100 + (i + 1) * barWidth;
+                float currentYPos = chartHeight - 50 - (float)((chartHeight - 100) * (RevenueChartData[i].Value / maxValue));
+
+                float nextXPos = 100 + (i + 2) * barWidth;
+                float nextYPos = chartHeight - 50 - (float)((chartHeight - 100) * (RevenueChartData[i + 1].Value / maxValue));
+
+                canvas.DrawLine(currentXPos, currentYPos, nextXPos, nextYPos, linePaint);
             }
         }
+
+
     }
 
     public class DataPoint

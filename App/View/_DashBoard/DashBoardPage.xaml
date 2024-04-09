@@ -5,44 +5,66 @@
              xmlns:local="clr-namespace:ISSProject"
              x:Class="ISSProject.DashBoardPage"
              x:DataType="local:DashBoardPage">
-    <StackLayout VerticalOptions="FillAndExpand">
 
-        <!-- SkiaSharp Canvas for Revenue Chart -->
-        <skia:SKCanvasView
-                           PaintSurface="OnPaintSurface"
-                           VerticalOptions="FillAndExpand"/>
-
+    <StackLayout VerticalOptions="CenterAndExpand" >
+        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" >
         <!-- Streams Label -->
-        <Label Text="Streams:" VerticalOptions="Start" HorizontalOptions="Center"/>
-        <StackLayout BindableLayout.ItemsSource="{Binding StreamsLabelText}" VerticalOptions="Start" HorizontalOptions="Center">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding}" VerticalOptions="Start" HorizontalOptions="Center"/>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </StackLayout>
+            <StackLayout BindableLayout.ItemsSource="{Binding StreamsLabelText}" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,0,20,0">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding}" VerticalOptions="Start" HorizontalOptions="End" FontSize="Large"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
 
-        <!-- Claims Label -->
-        <Label Text="Claims:" VerticalOptions="Start" HorizontalOptions="Center"/>
-        <StackLayout BindableLayout.ItemsSource="{Binding ClaimsLabelText}" VerticalOptions="Start" HorizontalOptions="Center">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding}" VerticalOptions="Start" HorizontalOptions="Center"/>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </StackLayout>
+            <!-- Claims Label -->
+            <StackLayout BindableLayout.ItemsSource="{Binding ClaimsLabelText}" VerticalOptions="Start" HorizontalOptions="End">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding}" VerticalOptions="Start" HorizontalOptions="End" FontSize="Large"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </HorizontalStackLayout>
+        <!-- SkiaSharp Canvas for Revenue Chart -->
+        <Frame CornerRadius="10"
+               HasShadow="True"
+               Margin="20"
+               Padding="5"
+               HeightRequest="200">
+            <Frame.Background>
+                <SolidColorBrush Color="DimGray"/>
+            </Frame.Background>
+            <StackLayout>
+                <Label Text="Revenue Chart" FontSize="28" HorizontalOptions="Center"/>
+                <skia:SKCanvasView BackgroundColor="Transparent"
+                                PaintSurface="OnPaintSurface"
+                                VerticalOptions="FillAndExpand"
+                                Margin="0,0,20,0"/>
+            </StackLayout>
+        </Frame>
 
         <!-- Artists List -->
-        <ListView ItemsSource="{Binding Artists}" VerticalOptions="FillAndExpand">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Label Text="{Binding}" VerticalOptions="Start" HorizontalOptions="Center"/>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
+        <Frame CornerRadius="10"
+               HasShadow="True"
+               Margin="20"
+               Padding="5">
+            <Frame.Background>
+                <SolidColorBrush Color="DimGray"/>
+            </Frame.Background>
+            <StackLayout>
+                <Label Text="All featured Artists" FontSize="28" HorizontalOptions="Center"/>
+                <ListView ItemsSource="{Binding Artists}" VerticalOptions="FillAndExpand" Margin="0,20,0,20">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label Text="{Binding}" VerticalOptions="Start" HorizontalOptions="Center" FontSize="21"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </Frame>
         <!-- Buttons -->
         <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
             <Button Text="Buy More Ads" Clicked="BuyAds_Clicked" Margin="5"/>

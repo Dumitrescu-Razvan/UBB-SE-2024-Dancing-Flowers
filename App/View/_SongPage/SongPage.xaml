@@ -10,7 +10,7 @@
                 <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
                     <Label Text="{Binding}" FontSize="Small" TextColor="White" VerticalOptions="Center" />
                     <Button Text="Info" FontSize="Small" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="Center"
-                            Clicked="Clicked"/>
+                            Clicked="SongInfo_Clicked"/>
                 </StackLayout>
             </ViewCell>
         </DataTemplate>
@@ -23,23 +23,54 @@
         </LinearGradientBrush>
     </ContentPage.Background>
 
-    <StackLayout VerticalOptions="Center" Margin="30" Padding="50">
-        <Label Text="Songs" FontSize="Large" TextColor="White" HorizontalOptions="Center" />
-        <BoxView HeightRequest="80" BackgroundColor="Transparent"/>
+    <Grid Margin="20" VerticalOptions="CenterAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <StackLayout Padding="10">
-            <StackLayout BindableLayout.ItemsSource="{Binding Songs}">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
-                            <Label Text="{Binding}" FontSize="Small" TextColor="White" VerticalOptions="Center" />
-                            <Button Text="Info" FontSize="Small" TextColor="White" HorizontalOptions="EndAndExpand" VerticalOptions="Center"
-                                    Clicked="Clicked"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
+        <!-- Section for songs -->
+        <Label Grid.Row="0" Text="Songs" FontSize="Large" TextColor="White" HorizontalOptions="Center" Margin="10"/>
+        <ScrollView Grid.Row="1"  Padding="10" BackgroundColor="#33000000">
+            <StackLayout>
+                <BoxView HeightRequest="10" BackgroundColor="Transparent"/>
+                <ListView ItemsSource="{Binding Songs}" ItemTemplate="{StaticResource SongTemplate}" BackgroundColor="Transparent"/>
             </StackLayout>
+        </ScrollView>
+        <Label Grid.Row="2" Text="Top three Artists" FontSize="Large" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+        <!-- Section for top three artists -->
+        <StackLayout Grid.Row="3">
+            <Border HeightRequest="140" 
+                    WidthRequest="140"
+                    StrokeShape="RoundRectangle 80,80,80,80"
+                    HorizontalOptions="Center"
+                    StrokeThickness="4"
+                    Margin="2"
+                    >
+                <Image HorizontalOptions="CenterAndExpand" Source="{Binding TopThreeArtists[0]}" WidthRequest="140" HeightRequest="140" Aspect="AspectFill"/>
+            </Border>
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                <Border HeightRequest="140" 
+                    WidthRequest="140"
+                    StrokeShape="RoundRectangle 80,80,80,80"
+                    HorizontalOptions="Center"
+                    StrokeThickness="4"
+                    Margin="2">
+                    <Image Source="{Binding TopThreeArtists[1]}" WidthRequest="140" HeightRequest="140" Aspect="AspectFill"/>
+                </Border>
+                <Border HeightRequest="140" 
+                    WidthRequest="140"
+                    StrokeShape="RoundRectangle 80,80,80,80"
+                    HorizontalOptions="Center"
+                    StrokeThickness="2"
+                    Margin="2">
+                <Image Source="{Binding TopThreeArtists[2]}" WidthRequest="140" HeightRequest="140" Aspect="AspectFill"/>
+                </Border>
+            </HorizontalStackLayout>
         </StackLayout>
-    </StackLayout>
+
+    </Grid>
 
 </ContentPage>

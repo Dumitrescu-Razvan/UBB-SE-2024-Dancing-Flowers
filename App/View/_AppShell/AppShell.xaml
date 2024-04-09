@@ -33,6 +33,11 @@
                 ContentTemplate="{DataTemplate local:DashBoardPage}"
                 Route="DashBoardPage" />
         </Tab>
+        <Tab x:Name="IsAClientCont" Title="Contracts">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:ContractsPage}"
+                Route="ContractsPage" />
+        </Tab>
         <Tab x:Name="IsAdminSub" Title="Admin Panel">
             <ShellContent
                 ContentTemplate="{DataTemplate local:AdminPage}"
