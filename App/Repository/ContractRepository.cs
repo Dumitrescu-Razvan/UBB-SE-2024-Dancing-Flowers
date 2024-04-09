@@ -19,7 +19,7 @@ namespace App.Repository
 
         public override Contract getById(int id)
         {
-            var query = "SELECT * FROM Contracts WHERE Id = @Id";
+            var query = "SELECT * FROM Contracts WHERE id = @Id";
             var parameters = new SqlParameter[] { new SqlParameter("@Id", id) };
             return ExecuteQuery(query, ContractMapper, parameters).FirstOrDefault();
         }
@@ -32,10 +32,13 @@ namespace App.Repository
 
         public override bool Add(Contract contract)
         {
-            var query = "INSERT INTO Contracts (id) VALUES (@id)";
+            var query = "INSERT INTO Contracts (clientId1,clientId2,musicId) VALUES (@clientId1,@clientId2,@musicId)";
+            
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@id", contract.id),
+                new SqlParameter("@clientId1", contract.client1),
+                new SqlParameter("@clientId2", contract.client2),
+                new SqlParameter("@musicId", contract.song)
             };
 
             return ExecuteNonQuery(query, parameters);
@@ -43,8 +46,15 @@ namespace App.Repository
 
         public override bool Update(Contract contract)
         {
-
-            return true;
+            var querry = "UPDATE Contracts SET clientId1 = @clientId1, clientId2 = @clientId2, musicId = @musicId WHERE id = @Id";
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@clientId1", contract.client1),
+                new SqlParameter("@clientId2", contract.client2),
+                new SqlParameter("@musicId", contract.song),
+                new SqlParameter("@Id", contract.id)
+            };
+            return ExecuteNonQuery(querry, parameters);
         }
 
         public override bool Delete(Contract contract)
@@ -56,14 +66,17 @@ namespace App.Repository
 
         public static Contract ContractMapper(IDataReader reader)
         {
-            var id = (int)reader["Id"];
-            var contract = new Contract(id);
+            var id = (int)reader["id"];
+            var client1 = (int)reader["clientId1"];
+            var client2 = (int)reader["clientId2"];
+            var songId = (int)reader["musicId"];
+            var contract = new Contract(id,client1,client2, songId);
             return contract;
         }
 
-        public Contract GetContractWithClientsAndSong(int contractId)
+        /*public Contract GetContractWithClientsAndSong(int contractId)
         {
-            List<Client> clients = new List<Client>();
+            
             Song song = null;
 
             using (SqlConnection connection = new SqlConnection(this._connectionString))
@@ -97,17 +110,15 @@ namespace App.Repository
 
                             Client client = new ClientRepository(_connectionString).getById(clientId); 
 
-                            
-                            clients.Add(client);
                         }
                     }
                 }
             }
 
-            Contract contract = new Contract(contractId, clients, song);
+            Contract contract = new Contract(client1,client2, song);
 
             return contract;
-        }
+        }*/
 
         public bool AddClientToContract(int contractId, int clientId)
         {
