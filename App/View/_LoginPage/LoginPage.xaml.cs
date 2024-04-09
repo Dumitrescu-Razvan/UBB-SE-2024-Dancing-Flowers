@@ -22,7 +22,7 @@ namespace ISSProject
                     Task poppingTask = Application.Current.MainPage.Navigation.PopAsync();
                     await poppingTask;
                     await DisplayAlert("Login Successful", "Welcome back!", "OK");
-                    await Application.Current.MainPage.Navigation.PushAsync(new AppShell(true, true, true));
+                    Application.Current.MainPage  = new AppShell(true, true, true);
                 }
             }
             else

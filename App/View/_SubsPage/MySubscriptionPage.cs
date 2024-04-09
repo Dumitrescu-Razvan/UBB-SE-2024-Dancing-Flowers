@@ -1,149 +1,81 @@
-using System.ComponentModel;
+using System;
 
 namespace ISSProject
 {
-    public partial class MySubscriptionPage : ContentPage, INotifyPropertyChanged
+    public partial class MySubscriptionPage : ContentPage
     {
-        private SubscriptionManager _subscriptionManager;
 
-        private string _description = "Enjoy the latest music tracks!";
-        public string Description
+        private bool _isSubscriptionSelected;
+        public bool IsSubscriptionSelected
         {
-            get { return _description; }
+            get { return _isSubscriptionSelected; }
             set
             {
-                if (_description != value)
+                if (_isSubscriptionSelected != value)
                 {
-                    _description = value;
-                    OnPropertyChanged(nameof(Description));
+                    _isSubscriptionSelected = value;
+                    OnPropertyChanged(nameof(IsSubscriptionSelected));
                 }
             }
         }
-
-        private string? _expirationText;
-        public string ExpirationText
+        private string _currentSubscription = new string("");
+        public string CurrentSubscription
         {
-            get { return _expirationText ?? string.Empty; }
+            get { return _currentSubscription; }
             set
             {
-                if (_expirationText != value)
+                if (_currentSubscription != value)
                 {
-                    _expirationText = value;
-                    OnPropertyChanged(nameof(ExpirationText));
+                    _currentSubscription = value;
+                    OnPropertyChanged(nameof(CurrentSubscription));
                 }
             }
+        
         }
+        private string[] _subscriptionDescriptions = {
+            "For only 1$/month you get:\n- fewer ads\n- shorter ads\n- maximum of 5 playlists (compared to 3 default)\n- better audio (128 kbps AAC)",
+            "Maximum of one ad/hour\nUnlimited playlists\nBetter audio 182kbps AAC",
+            "No ads\nBetter audio (320kbds)\nOffline support for up to 182 kbps AAC",
+            "Best audio (FLAC)\nOffline support for every bitrate, including FLAC"
+        };
 
-        private string? _changeTextButton;
-        public string ChangeTextButton
-        {
-            get { return _changeTextButton ?? string.Empty; }
-            set
-            {
-                if (_changeTextButton != value)
-                {
-                    _changeTextButton = value;
-                    OnPropertyChanged(nameof(ChangeTextButton));
-                }
-            }
-        }
+        private int _selectedTierIndex = 0; // Default to Bronze
 
-        private bool _isSubscribed;
-        public bool IsSubscribed
-        {
-            get { return _isSubscribed; }
-            set
-            {
-                if (_isSubscribed != value)
-                {
-                    _isSubscribed = value;
-                    OnPropertyChanged(nameof(IsSubscribed));
-                }
-            }
-        }
-        // Bindable properties for channel name, description, and subscription status
-        private string _channelName = "Music Channel";
-        public string ChannelName
-        {
-            get { return _channelName; }
-            set
-            {
-                if (_channelName != value)
-                {
-                    _channelName = value;
-                    OnPropertyChanged(nameof(ChannelName));
-                }
-            }
-        }
-
-
-        public MySubscriptionPage(string subscriptionName)
+        public MySubscriptionPage()
         {
             InitializeComponent();
+            BindingContext = this; // Set the BindingContext to this page
+            //<Label Text="{Binding CurrentSubscription}" FontSize="Medium"/>    
+            //get the current subscription from the database
+            CurrentSubscription = "Bronze";
 
-            // Initialize subscription manager
-            _subscriptionManager = new SubscriptionManager();
-
-            BindingContext = this;
-
-            ChannelName = subscriptionName;
-
-            // Set initial subscription status
-            IsSubscribed = _subscriptionManager.IsSubscribed;
-
-            // Update UI
-            UpdateExpirationLabel();
         }
 
-        private void SubscribeButton_Clicked(object sender, EventArgs e)
+        private void PickerSubscription_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Call subscription method
-            _subscriptionManager.Subscribe(ChannelName, this.Navigation);
-
-            // Update IsSubscribed based on the subscription status
-            IsSubscribed = _subscriptionManager.IsSubscribed;
-
-            // Update UI
-            UpdateExpirationLabel();
-        }
-
-        private void CancelSubscriptionButton_Clicked(object sender, EventArgs e)
-        {
-            // Call cancellation method
-            _subscriptionManager.CancelSubscription();
-
-            // Update UI
-            UpdateExpirationLabel();
-            IsSubscribed = false;
-        }
-
-        private void ChangeSubscriptionButton_Clicked(object sender, EventArgs e)
-        {
-            // Call change subscription method
-            _subscriptionManager.ChangeSubscription(this.Navigation);
-
-            // Update UI
-            UpdateExpirationLabel();
-        }
-
-
-        private void UpdateExpirationLabel()
-        {
-            if (_subscriptionManager.IsSubscribed)
+            var selectedIndex = pickerSubscription.SelectedIndex;
+            if (selectedIndex >= 0 && selectedIndex < _subscriptionDescriptions.Length)
             {
-                ExpirationText = $"Subscription Expires: {_subscriptionManager.ExpirationDate:dd/MM/yyyy}";
-                ChangeTextButton = "Change";
-            }
-            else
-            {
-                ExpirationText = "Not Subscribed";
-                ChangeTextButton = "Subscribe";
+                descriptionLabel.Text = _subscriptionDescriptions[selectedIndex]; // Set description based on selected index
+                _selectedTierIndex = selectedIndex; // Update selected tier index
+                UpdateIsSubscriptionSelected();
             }
         }
-        private async void BackToSubscriptionsButton_Clicked(object sender, EventArgs e)
+
+        private void PayButton_Clicked(object sender, EventArgs e)
         {
-            // Navigate back to the previous page
-            await Navigation.PopAsync();
+            //It goes to PaymentPage and gets the selected subscription tier
+            Navigation.PushAsync(new PaymentPage(GetSelectedTier()));
+        }
+
+        private void UpdateIsSubscriptionSelected()
+        {
+            IsSubscriptionSelected = _selectedTierIndex >= 0;
+        }
+
+        private string GetSelectedTier()
+        {
+                return pickerSubscription.SelectedItem.ToString();
         }
     }
 }

@@ -14,15 +14,6 @@
                 <Entry Placeholder="Exp. Date (MM/YY)" x:Name="ExpirationDateEntry" HorizontalOptions="FillAndExpand"/>
                 <Entry Placeholder="CVV" x:Name="CVVEntry" WidthRequest="100"/>
             </StackLayout>
-            <Label Text="Subscription Type" Margin="0,20,0,5"/>
-            <Picker x:Name="SubscriptionTypePicker">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Monthly</x:String>
-                        <x:String>Yearly</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="20">
                 <Button Text="Back" Clicked="BackButton_Clicked" HorizontalOptions="Center" Margin="2"/>
                 <Button Text="Pay" Clicked="PayButton_Clicked" HorizontalOptions="Center" Margin="2"/>
