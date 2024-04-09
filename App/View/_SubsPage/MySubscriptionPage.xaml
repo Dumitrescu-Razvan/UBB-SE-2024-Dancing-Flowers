@@ -1,24 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ISSProject"
              x:Class="ISSProject.MySubscriptionPage"
              x:DataType="local:MySubscriptionPage">
         
     <ContentPage.Content>
-        <StackLayout VerticalOptions="CenterAndExpand" Margin="10,0,0,0">
-            <Label Text="{Binding ChannelName}"  FontSize = "Large" HorizontalOptions="Center" Margin ="0,0,0,70"/>
-            <Label Text="Description:" FontSize="Medium"/>
-            <Label Text="{Binding Description}"  FontSize = "Medium"/>
-            <StackLayout Orientation="Horizontal" Margin="0,40,0,10">
-                <Button Text="Change Subscription" Clicked="ChangeSubscriptionButton_Clicked" Margin ="0,0,2,0" IsVisible="{Binding IsSubscribed}"/>
-                <Button Text="Cancel Subscription" Clicked="CancelSubscriptionButton_Clicked" Margin ="0,0,2,0" IsVisible="{Binding IsSubscribed}" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" Margin="0,40,0,10">
-                <Label x:Name="subscriptionExpirationLabel" Text="{Binding ExpirationText}" FontSize = "Medium" VerticalOptions="Center" />
-                <Button x:Name="subscriptionChangeButton" Text="{Binding ChangeTextButton}" Clicked="SubscribeButton_Clicked" Margin ="10,0,2,0" VerticalOptions="Center" />
-            </StackLayout>
-            <Button Text="Back to Subscriptions" Clicked="BackToSubscriptionsButton_Clicked" Margin="0,0,10,0"/>
+        <StackLayout VerticalOptions="CenterAndExpand" Margin="10">
+            <Label Text="Current Subscription Level:" FontSize="Medium" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="{Binding CurrentSubscription}" FontSize="Medium" HorizontalOptions="CenterAndExpand" Margin="0,0,0,40"/>
+            <Label Text="Select Subscription Level:" FontSize="Medium"/>
+            <Picker x:Name="pickerSubscription" Title="Select Level" SelectedIndexChanged="PickerSubscription_SelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Bronze</x:String>
+                        <x:String>Silver</x:String>
+                        <x:String>Gold</x:String>
+                        <x:String>Platinum</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Label x:Name="descriptionLabel" Text="" FontSize="Medium" Margin="0,20,0,0"/>
+            <Button Text="Change Subscription" Clicked="PayButton_Clicked" IsEnabled="{Binding IsSubscriptionSelected}" Margin="0,20,0,0"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

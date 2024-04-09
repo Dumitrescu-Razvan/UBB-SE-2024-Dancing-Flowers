@@ -3,21 +3,18 @@ namespace ISSProject
     public partial class PaymentPage : ContentPage
     {
         public event EventHandler<bool> ? PaymentCompleted;
-        private DateTime _startDate;
-        private string _subscriptionType;
-        private string _channelName;
+        private DateTime _startDate = DateTime.Now;
+        private string _tierType;
 
 
-        public PaymentPage(DateTime startDate, string subscriptionType, string channelName)
+        public PaymentPage(string tierType)
         {
             InitializeComponent();
 
-            _startDate = startDate;
-            _subscriptionType = subscriptionType;
-            _channelName = channelName;
+            _tierType = tierType;
 
             // Display subscription information
-            SubscriptionInfoLabel.Text = $"Start Date: {_startDate:dd/MM/yyyy}\nSubscription Type: {_subscriptionType}\nChannel: {_channelName}";
+            SubscriptionInfoLabel.Text = $"Start Date: {_startDate:dd/MM/yyyy}\nSubscription Type: {_tierType}";
         }
 
         private void BackButton_Clicked(object sender, EventArgs e)
