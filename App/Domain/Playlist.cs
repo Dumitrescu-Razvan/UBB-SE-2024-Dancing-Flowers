@@ -1,19 +1,19 @@
 using System;
-
+using System.Collections.Generic;
 namespace App.Domain
 {
     public class Playlist
     {
         private int id { get; }
-        private List<Song> songs { get; set; };
-        private string name { get; set; } = new string();
+        private List<Song> songs { get; set; }
+        private string name { get; set; } = string.Empty;
 
         public Playlist(string name)
         {
             this.name = name;
         }
 
-        public Playlist(int id, int name, List<Song> songs)
+        public Playlist(int id, string name, List<Song> songs)
         {
             this.id = id;
             this.name = name;
@@ -26,19 +26,18 @@ namespace App.Domain
             return true;
         }
 
-        public bool removeSong(int songId)
+/*        public bool removeSong(int songId)
         {
-            try
+        foreach (Song song in this.songs)
             {
-                this.songs.Remove(this.songs.Find(song => song.Id == songId));
+                if (song.id == songId)
+                {
+                    this.songs.Remove(song);
+                    return true;
+                }
             }
-            catch (Exception e)
-            {
-                return false;
-            }
-
-            return true;
-        }
+            return false; 
+        }*/
 
     }
 

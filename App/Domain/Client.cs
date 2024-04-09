@@ -1,25 +1,28 @@
 using System;
+using System.Collections.Generic;
 
 namespace App.Domain
 {
-   
+
     public class Client : Account
     {
-        protected private string companyName { get; set; } = new string();
-        protected private string contactEmail { get; set; } = new string();
-        protected private string businessEmail { get; set; } = new string();
+        public string companyName { get; set; } = string.Empty;
+        public string contactEmail { get; set; } = string.Empty;
+        public string businessEmail { get; set; } = string.Empty;
 
-        protected private list<Ad> ads { get; set; } = new list<Ad>();
-        protected private list<Contract> contracts { get; set; } = new list<Contract>();
+        protected private List<Ad> ads { get; set; } = new List<Ad>();
+        protected private List<Contract> contracts { get; set; } = new List<Contract>();
 
-        public Client(int id, string username, string password, string phone, string zone, string salt, string companyName, string contactEmail, string businessEmail) : base(id, username, password, contactEmail, phone, zone, salt)
+        public Client(int id, string username, string password,string email, string phone, string salt, string companyName, string contactEmail, string businessEmail) : 
+            base(id ,username, password, email, phone, salt)
         {
             this.companyName = companyName;
             this.contactEmail = contactEmail;
             this.businessEmail = businessEmail;
+
         }
 
-        public bool purchaseAdd(Ad ad)
+        public void purchaseAdd(Ad ad)
         {
             /*
              * @param ad: Ad
@@ -30,13 +33,13 @@ namespace App.Domain
              *
              * Returns true if the ad is purchased successfully, else false
              */
-            if (ads.Add(ad))
+            try
             {
-                return true;
+                ads.Add(ad);
             }
-            else
+            catch (Exception e)
             {
-                return false;
+                throw e;
             }
         }
 
@@ -61,7 +64,7 @@ namespace App.Domain
             }
         }
 
-        public bool addContract(Contract contract)
+        public void addContract(Contract contract)
         {
             /*
              * @param contract: Contract
@@ -72,14 +75,15 @@ namespace App.Domain
              
              * Returns true if the contract is purchased successfully, else false
              */
-            if (contracts.Add(contract))
+            try
             {
-                return true;
+                contracts.Add(contract);
             }
-            else
+            catch (Exception e)
             {
-                return false;
+                throw e;
             }
+
         }
 
         public bool cancelContract(Contract contract)
@@ -103,5 +107,6 @@ namespace App.Domain
                 return false;
             }
         }
+
     }
 }

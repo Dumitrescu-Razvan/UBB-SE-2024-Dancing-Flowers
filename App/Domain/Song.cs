@@ -1,15 +1,16 @@
 using System;
+using System.Collections.Generic;
 
 namespace App.Domain
 {
     public class Song : Playable
     {
-        private string artist { get; set; } = new string();
-        private string album { get; set; } = new string();
-        private int likes { get; set; };
+        private string artist { get; set; } = string.Empty;
+        private string album { get; set; } = string.Empty;
+        private int likes { get; set; }
         private int shares { get; set; }
         private int saves { get; set; }
-        private ? List<String> restrictions { get; set; }
+        private List<String> restrictions { get; set; }
 
         public Song(string artist, string album, List<String> restrictions, int duration) : base()
         {
@@ -22,7 +23,8 @@ namespace App.Domain
             this.restrictions = restrictions;
         }
 
-        public Song(int id, string artist, string album, List<string> restrictions, int duration, int timesPlayed, int likes, int shares, int saves) : base(id, duration, timesPlayed)
+        public Song(int id, string artist, string album, List<string> restrictions, int duration, int timesPlayed, int likes, int shares, int saves) :
+            base(id, duration, timesPlayed)
         {
 
             this.artist = artist;
@@ -35,16 +37,18 @@ namespace App.Domain
 
         public void like()
         {
-            Likes++;
+            this.likes++;
         }
         public void share()
         {
-            Shares++;
+            this.shares++;
         }
         public void save()
         {
-            Saves++;
+            this.saves++;
         }
+
+
     }
 
 }

@@ -1,21 +1,24 @@
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Collections.Generic;
 
 namespace App.Domain
 {
-   public class Contract
+    public class Contract
     {
-       private int id { get; }
-       private List<Client> clients { get; set; } = new List<Client>();
-        private Song song { get; set; } = new Song();
+        public int id { get; }
+        public List<Client> clients { get; set; } = new List<Client>();
+        public Song song { get; set; }
 
-        Contract(int id)
+        public Contract(int id)
         {
             this.id = id;
+            clients = new List<Client>();
+            song = null;
         }
 
-        Contract(int id, List<Client> clients, Song song)
+        public Contract(int id, List<Client> clients, Song song)
         {
             //Constructor with all the attributes
             this.id = id;
@@ -26,7 +29,7 @@ namespace App.Domain
         public void AddClient(Client client)
         {
             /*
-             * Adds a client to the list of clients envolved in the contract
+             * Adds a client to the list of clients involved in the contract
              */
             clients.Add(client);
         }
@@ -34,7 +37,7 @@ namespace App.Domain
         public void RemoveClient(Client client)
         {
             /*
-             * Removes a client from the list of clients envolved in the contract
+             * Removes a client from the list of clients involved in the contract
              */
             clients.Remove(client);
         }

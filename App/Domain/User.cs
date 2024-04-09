@@ -1,16 +1,18 @@
 using System;
+using System.Collections.Generic;
 
 namespace App.Domain
 {
     public class User : Account
     {
-        protected private string location { get; set; } = new string();
-        protected private int age { get; set; } = new int();
-        protected private string subscriptionTier { get; set; } = new string();
-        protected private List<Playlist> playlists { get; set; } = new List<Playlist>();
-        protected private bool isAdmin { get; set; } = new bool();
+        public string location { get; set; } = string.Empty;
+        public int age { get; set; } = new int();
+        public string subscriptionTier { get; set; } = string.Empty;
+        public List<Playlist> playlists { get; set; } = new List<Playlist>();
+        public bool isAdmin { get; set; } = new bool();
 
-        public User(int id, string username, string password, string email, string phone, string zone, string salt, string location, int age, string subscriptionTier) : base(id, username, password, email, phone, zone, salt)
+        public User(int id, string username, string password, string email, string phone, string salt, string location, int age, string subscriptionTier) : 
+            base(id,username,password,email,phone,salt)
         {
             this.location = location;
             this.age = age;

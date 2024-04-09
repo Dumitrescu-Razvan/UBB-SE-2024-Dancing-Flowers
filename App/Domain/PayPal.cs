@@ -5,7 +5,7 @@ namespace App.Domain
 
     public class PayPal : Payment
     {
-        private string email { get; set; } = new string();
+        private string email { get; set; } = string.Empty;
 
         public PayPal(string email) : base()
         {

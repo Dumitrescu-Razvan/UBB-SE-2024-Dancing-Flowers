@@ -13,12 +13,12 @@ namespace App.Domain
             this.id = id;
         }
 
-        public Payment() 
+        public Payment()
         {
             this.balance = 0;
         }
-            
-    
+
+
     }
 
 }

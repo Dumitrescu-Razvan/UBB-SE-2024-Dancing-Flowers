@@ -4,9 +4,9 @@ namespace App.Domain
 {
     public class Card : Payment
     {
-        private string cardNumber { get; set; } = new string();
-        private string cvv { get; set; } = new string();
-        private string expirationDate { get; set; } = new string();
+        private string cardNumber { get; set; } = string.Empty;
+        private string cvv { get; set; } = string.Empty;
+        private string expirationDate { get; set; } = string.Empty;
 
         public Card(string cardNumber, string cvv, string expirationDate) : base()
         {
