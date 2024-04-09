@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace App.Domain
 {
     public class Song : Playable
     {
+        private string title { get; set; } = string.Empty;
         private string artist { get; set; } = string.Empty;
         private string album { get; set; } = string.Empty;
         private int likes { get; set; }
@@ -12,8 +14,9 @@ namespace App.Domain
         private int saves { get; set; }
         private List<String> restrictions { get; set; }
 
-        public Song(string artist, string album, List<String> restrictions, int duration) : base()
+        public Song(string title, string artist, string album, List<String> restrictions, int duration) : base()
         {
+            this.title = title;
             this.artist = artist;
             this.album = album;
             this.duration = duration;
@@ -23,10 +26,10 @@ namespace App.Domain
             this.restrictions = restrictions;
         }
 
-        public Song(int id, string artist, string album, List<string> restrictions, int duration, int timesPlayed, int likes, int shares, int saves) :
+        public Song(int id,string title, string artist, string album, List<string> restrictions, int duration, int timesPlayed, int likes, int shares, int saves) :
             base(id, duration, timesPlayed)
         {
-
+            this.title = title;
             this.artist = artist;
             this.album = album;
             this.likes = likes;
@@ -48,6 +51,17 @@ namespace App.Domain
             this.saves++;
         }
 
+        public static List<String> getRestrictionsFromString(string text)
+        {
+            if (text.EndsWith(";"))
+            {
+                text = text.Substring(0, text.Length - 1);
+            }
+
+            List<string> restrictions = new List<string>(text.Split(';'));
+
+            return restrictions;
+        }
 
     }
 
