@@ -1,0 +1,129 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{D59442CF-4B43-42C2-84F3-646E6B90D36D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>ConsoleApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>ISS</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".git\config" />
+    <None Include=".git\description" />
+    <None Include=".git\HEAD" />
+    <None Include=".git\hooks\applypatch-msg.sample" />
+    <None Include=".git\hooks\commit-msg.sample" />
+    <None Include=".git\hooks\fsmonitor-watchman.sample" />
+    <None Include=".git\hooks\post-update.sample" />
+    <None Include=".git\hooks\pre-applypatch.sample" />
+    <None Include=".git\hooks\pre-commit.sample" />
+    <None Include=".git\hooks\pre-merge-commit.sample" />
+    <None Include=".git\hooks\pre-push.sample" />
+    <None Include=".git\hooks\pre-rebase.sample" />
+    <None Include=".git\hooks\pre-receive.sample" />
+    <None Include=".git\hooks\prepare-commit-msg.sample" />
+    <None Include=".git\hooks\push-to-checkout.sample" />
+    <None Include=".git\hooks\sendemail-validate.sample" />
+    <None Include=".git\hooks\update.sample" />
+    <None Include=".git\index" />
+    <None Include=".git\info\exclude" />
+    <None Include=".git\logs\HEAD" />
+    <None Include=".git\logs\refs\heads\main" />
+    <None Include=".git\logs\refs\remotes\origin\HEAD" />
+    <None Include=".git\objects\pack\pack-d7ff6e6d64b3a2f82952b6c101de1b26df389b8c.idx" />
+    <None Include=".git\objects\pack\pack-d7ff6e6d64b3a2f82952b6c101de1b26df389b8c.pack" />
+    <None Include=".git\objects\pack\pack-d7ff6e6d64b3a2f82952b6c101de1b26df389b8c.rev" />
+    <None Include=".git\packed-refs" />
+    <None Include=".git\refs\heads\main" />
+    <None Include=".git\refs\remotes\origin\HEAD" />
+    <None Include=".vs\ProjectSettings.json" />
+    <None Include=".vs\slnx.sqlite" />
+    <None Include=".vs\UBB-SE-2024-Dancing-Flowers\FileContentIndex\d2de6269-c4d6-4750-bdd4-8dc7ecadd527.vsidx" />
+    <None Include=".vs\UBB-SE-2024-Dancing-Flowers\v17\.wsuo" />
+    <None Include=".vs\UBB-SE-2024-Dancing-Flowers\v17\DocumentLayout.json" />
+    <None Include=".vs\VSWorkspaceState.json" />
+    <None Include="app.config" />
+    <None Include="Diagrams\UseCase.mdj" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App\Domain\Account.cs" />
+    <Compile Include="App\Domain\Ad.cs" />
+    <Compile Include="App\Domain\Card.cs" />
+    <Compile Include="App\Domain\Client.cs" />
+    <Compile Include="App\Domain\Contract.cs" />
+    <Compile Include="App\Domain\Payment.cs" />
+    <Compile Include="App\Domain\PayPal.cs" />
+    <Compile Include="App\Domain\Playable.cs" />
+    <Compile Include="App\Domain\Playlist.cs" />
+    <Compile Include="App\Domain\Song.cs" />
+    <Compile Include="App\Domain\User.cs" />
+    <Compile Include="App\Repository\ArtistRepository.cs" />
+    <Compile Include="App\Repository\ClientRepository.cs" />
+    <Compile Include="App\Repository\ContractRepository.cs" />
+    <Compile Include="App\Repository\EntityRepository.cs" />
+    <Compile Include="App\Repository\PlaylistRepository.cs" />
+    <Compile Include="App\Repository\SongRepository.cs" />
+    <Compile Include="App\Repository\UserRepository.cs" />
+    <Compile Include="App\Service\Admin.cs" />
+    <Compile Include="App\Service\ClientService.cs" />
+    <Compile Include="App\Service\ContractService.cs" />
+    <Compile Include="App\Service\Service.cs" />
+    <Compile Include="App\Service\SongService.cs" />
+    <Compile Include="App\Service\UserService.cs" />
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Diagrams\ClassDiagram.png" />
+    <Content Include="Diagrams\Text.txt" />
+    <Content Include="Diagrams\UseCaseDiagram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".git\objects\info\" />
+    <Folder Include=".git\refs\tags\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>
