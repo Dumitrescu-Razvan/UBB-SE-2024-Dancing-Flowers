@@ -132,6 +132,7 @@ namespace App.Service
         /// <summary>
         /// Creates a new user.
         /// </summary>
+        /// <param name="id">The id of the user.</param>
         /// <param name="username">The username of the user.</param>
         /// <param name="password">The password of the user.</param>
         /// <param name="email">The email address of the user.</param>
@@ -142,11 +143,11 @@ namespace App.Service
         /// <param name="age">The age of the user.</param>
         /// <param name="subscriptionTier">The initial subscription tier of the user.</param>
         /// <exception cref="Exception">Thrown when user creation fails.</exception>
-        public void CreateUser(string username, string password, string email, string phone, string zone, string salt, string location, int age, string subscriptionTier)
+        public void CreateUser(int id, string username, string password, string email, string phone, string zone, string salt, string location, int age, string subscriptionTier)
         {
             try
             {
-                var user = new User(username, password, email, phone, zone, salt, location, age, subscriptionTier, Guid.NewGuid());
+                var user = new User(id,username,password,email,phone,zone,salt,location,age,subscriptionTier);
                 _userRepository.Add(user);
             }
             catch (Exception ex)
