@@ -11,12 +11,13 @@ namespace App.Domain
         public List<Playlist> playlists { get; set; } = new List<Playlist>();
         public bool isAdmin { get; set; } = new bool();
 
-        public User(int id, string username, string password, string email, string phone, string salt, string location, int age, string subscriptionTier) : 
-            base(id,username,password,email,phone,salt)
+        public User(int id, string username, string password, string email, string salt, string location, int age, string subscriptionTier, bool isAdmin) : 
+            base(id,username,password,email,salt)
         {
             this.location = location;
             this.age = age;
             this.subscriptionTier = subscriptionTier;
+            this.isAdmin = isAdmin;
         }
 
         public void purchaseSubscription(string subscriptionTier)

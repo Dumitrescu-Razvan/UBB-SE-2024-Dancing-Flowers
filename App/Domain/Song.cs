@@ -14,18 +14,6 @@ namespace App.Domain
         public int saves { get; set; }
         public List<String> restrictions { get; set; }
 
-        public Song(string title, string artist, string album, List<String> restrictions, int duration) : base()
-        {
-            this.title = title;
-            this.artist = artist;
-            this.album = album;
-            this.duration = duration;
-            this.likes = 0;
-            this.shares = 0;
-            this.saves = 0;
-            this.restrictions = restrictions;
-        }
-
         public Song(int id,string title, string artist, string album, List<string> restrictions, int duration, int timesPlayed, int likes, int shares, int saves) :
             base(id, duration, timesPlayed)
         {

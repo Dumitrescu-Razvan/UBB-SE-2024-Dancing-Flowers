@@ -2,166 +2,50 @@
 using App.Domain;
 using App.Repository;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace App.Service
 {
-	public class ClientService
-	{
+    public class ClientService
+    {
         private readonly ClientRepository _clientRepository;
 
-        //new instance of ClientService class
         public ClientService(ClientRepository clientRepository)
         {
             _clientRepository = clientRepository;
         }
 
-        //add new client to system
-        public void AddClient(Client client)
+        public bool IsValidCreateAcc(string email, string username, string password, string confirmPassword)
         {
-            try { _clientRepository.Add(client); }
-            catch (ArgumentException ex){ Comsole.WriteLine($"Client add error."); }
-        }
-
-        //handle ad purchasing by a client
-        public void purchaseAdd(Ad ad)
-        {
-            try
+            if (email == null || username == null || password == null || confirmPassword == null)
             {
-                Client client = _clientRepository.Find(client => client.Id == clientId);
-                if (client != null) { return client.purchaseAd(ad); }
-                else { throw new ArgumentException("Client not found"); }
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine(ex.Message );
                 return false;
             }
-        }
-
-        //retrieve all clients
-        public List<Client> GetAllClients()
-        {
-            return _clientRepository.GetAllClients();
-        }
-
-        //retrieve a specific client by its Id
-        public Client GetClientById(int id)
-        {
-            return _clientRepository.Find(client => client.Id == id);
-        }
-
-        //update client information
-        public void UpdateClient(Client updatedClient)
-        {
-            try
+            if (email == "" || username == "" || password == "" || confirmPassword == "")
             {
-                Client clienttoUpdate = _clientRepository.Find(client => client.Id == updatedClient.Id);
-                if (clienttoUpdate != null)
-                {
-                    clientToUpdate.username = updatedClient.username;
-                    clientToUpdate.password = updatedClient.password;
-                    clientToUpdate.phone = updatedClient.phone;
-                    clientToUpdate.zone = updatedClient.zone;
-                    clientToUpdate.companyName = updatedClient.companyName;
-                    clientToUpdate.contactEmail = updatedClient.contactEmail;
-                    clientToUpdate.businessEmail = updatedClient.businessEmail;
-                }
-                else
-                {
-                    throw new ArgumentExcpetion("Client not found");
-                }
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
-        }
-
-        //remove client from system
-        public void RemoveClient(int id)
-        {
-            try
-            {
-                Client clientToRemove = _clientRepository.Find(client => client.Id == id);
-                if (clientToRemove != null)
-                {
-                    clients.Remove(clientToRemove);
-                }
-                else
-                {
-                    throw new ArgumentException("Client not found");
-                }
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
-        }
-
-        //handle canceling an ad by client
-        public bool CancelAd(int clientId,Ad ad)
-        {
-            try
-            {
-                Client client = _clientRepository.Find(client => client.Id == clientId);
-                if (client != null)
-                {
-                    return client.CancelAd(ad);
-                }
-                else
-                {
-                    throw new ArgumentException("Client not found");
-                }
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
-        }
-
-        //handle adding a contract for a client
-        public bool AddContract(int clientId, Contract contract)
-        {
-            try
+            if (password != confirmPassword)
             {
-                Client client = _clientRepository.Find(client => client.Id == clientId);
-                if (client != null)
-                {
-                    return client.AddContract(contract);
-                }
-                else
-                {
-                    throw new ArgumentException("Client not found");
-                }
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
+            return true;
         }
 
-        //handle canceling a contract for a client
-        public bool CancelContract(int clientId,Contract contract)
+        public bool CreateAccount(string email, string username, string password, string confirmPassword, string artistName)
         {
-            try
+            if (IsValidCreateAcc(email, username, password, confirmPassword))
             {
-                Client client = _clientRepository.Find(client => client.Id == clientId);
-                if (client != null)
-                {
-                    return client.CancelContract(contract);
-                }
-                else
-                {
-                    throw new ArgumentException("Client not found");
-                }
+                var client = new Client(1, username, password, email, "", artistName);
+                return true;
             }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-                return false;
-            }
+            return false;
+        }
+
+        public bool IsValidLogin(string _username, string _password)
+        {
+            var client = _clientRepository.getByUsername(_username);
+            return client.passwordHash == client.hashPassword(_password, client.salt);
         }
     }
 }

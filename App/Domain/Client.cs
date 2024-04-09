@@ -9,16 +9,19 @@ namespace App.Domain
         public string companyName { get; set; } = string.Empty;
         public string contactEmail { get; set; } = string.Empty;
         public string businessEmail { get; set; } = string.Empty;
+        public string artistName { get; set; } = string.Empty;
 
         protected private List<Ad> ads { get; set; } = new List<Ad>();
         protected private List<Contract> contracts { get; set; } = new List<Contract>();
 
-        public Client(int id, string username, string password,string email, string phone, string salt, string companyName, string contactEmail, string businessEmail) : 
-            base(id ,username, password, email, phone, salt)
+        public Client(int id, string username, string password,string email, string salt,string artistName) : 
+            base(id ,username, password, email, salt)
         {
             this.companyName = companyName;
             this.contactEmail = contactEmail;
             this.businessEmail = businessEmail;
+            this.artistName = artistName;
+
 
         }
 

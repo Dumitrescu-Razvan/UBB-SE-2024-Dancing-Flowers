@@ -25,17 +25,15 @@ namespace App.Domain
         public string passwordHash { get; set; } = string.Empty;
         public string salt { get; set; } = string.Empty;
         public string email { get; set; } = string.Empty;
-        public string phone { get; set; } = string.Empty;
 
         protected private List<Payment> payments { get; set; } = new List<Payment>();
 
         //Constructor
-        public Account(int id, string username, string password, string email, string phone, string salt)
+        public Account(int id, string username, string password, string email, string salt)
         {
             //set all the properties
             this.username = username;
             this.email = email;
-            this.phone = phone;
             this.salt = salt;
             this.id = id;
 
@@ -108,7 +106,7 @@ namespace App.Domain
         }
 
         // Method to hash password with salt
-        private string hashPassword(string password, string salt)
+        public string hashPassword(string password, string salt)
         {
             /*
              * @param password: string

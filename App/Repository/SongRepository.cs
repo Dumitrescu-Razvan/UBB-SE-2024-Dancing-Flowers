@@ -17,8 +17,8 @@ namespace App.Repository
 
         public override Song getById(int id)
         {
-            var query = "SELECT * FROM Songs WHERE Id = @Id";
-            var parameters = new SqlParameter[] { new SqlParameter("@Id", id) };
+            var query = "SELECT * FROM Songs WHERE id = @id";
+            var parameters = new SqlParameter[] { new SqlParameter("@id", id) };
             return ExecuteQuery(query, SongMapper, parameters).FirstOrDefault();
         }
 
@@ -30,10 +30,10 @@ namespace App.Repository
 
         public override bool Add(Song song)
         {
-            var query = "INSERT INTO Songs (id,title, artist, album, restriction, duration, timesPlayed, likes, shares, saves) VALUES (@id, @title, @artist, @album, @restrictions, @duration, @timesPlayed, @likes, @shares, @saves)";
+            var query = "INSERT INTO Songs (title, artist, album,likes,shares,saves,restrictions) VALUES ( @title, @artist, @album, @likes, @shares, @saves, @restrictions)";
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@id", song.id),
+                //new SqlParameter("@id", song.id),
                 new SqlParameter("@title", song.title),
                 new SqlParameter("@artist", song.artist),
                 new SqlParameter("@album", song.album),

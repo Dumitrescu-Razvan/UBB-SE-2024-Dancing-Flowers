@@ -50,7 +50,7 @@ namespace App.Repository
         public override bool Delete(Contract contract)
         {
             var query = "DELETE FROM Contracts WHERE Id = @Id";
-            var parameters = new SqlParameter[] { new SqlParameter("@Id", contract.Id) };
+            var parameters = new SqlParameter[] { new SqlParameter("@Id", contract.id) };
             return ExecuteNonQuery(query, parameters);
         }
 
