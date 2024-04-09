@@ -1,0 +1,328 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ISSProject"
+             x:Class="ISSProject.SliderAgeRegion">
+
+    <ContentPage.Resources>
+        <x:Array x:Key="CountryArray" Type="{x:Type x:String}">
+            <x:String>Afghanistan</x:String>
+            <x:String>Albania</x:String>
+            <x:String>Algeria</x:String>
+            <x:String>Andorra</x:String>
+            <x:String>Angola</x:String>
+            <x:String>Antigua and Barbuda</x:String>
+            <x:String>Argentina</x:String>
+            <x:String>Armenia</x:String>
+            <x:String>Australia</x:String>
+            <x:String>Austria</x:String>
+            <x:String>Azerbaijan</x:String>
+            <x:String>Bahamas</x:String>
+            <x:String>Bahrain</x:String>
+            <x:String>Bangladesh</x:String>
+            <x:String>Barbados</x:String>
+            <x:String>Belarus</x:String>
+            <x:String>Belgium</x:String>
+            <x:String>Belize</x:String>
+            <x:String>Benin</x:String>
+            <x:String>Bhutan</x:String>
+            <x:String>Bolivia</x:String>
+            <x:String>Bosnia and Herzegovina</x:String>
+            <x:String>Botswana</x:String>
+            <x:String>Brazil</x:String>
+            <x:String>Brunei</x:String>
+            <x:String>Bulgaria</x:String>
+            <x:String>Burkina Faso</x:String>
+            <x:String>Burundi</x:String>
+            <x:String>Cabo Verde</x:String>
+            <x:String>Cambodia</x:String>
+            <x:String>Cameroon</x:String>
+            <x:String>Canada</x:String>
+            <x:String>Central African Republic</x:String>
+            <x:String>Chad</x:String>
+            <x:String>Chile</x:String>
+            <x:String>China</x:String>
+            <x:String>Colombia</x:String>
+            <x:String>Comoros</x:String>
+            <x:String>Congo (Congo-Brazzaville)</x:String>
+            <x:String>Costa Rica</x:String>
+            <x:String>Croatia</x:String>
+            <x:String>Cuba</x:String>
+            <x:String>Cyprus</x:String>
+            <x:String>Czechia (Czech Republic)</x:String>
+            <x:String>Democratic Republic of the Congo</x:String>
+            <x:String>Denmark</x:String>
+            <x:String>Djibouti</x:String>
+            <x:String>Dominica</x:String>
+            <x:String>Dominican Republic</x:String>
+            <x:String>Ecuador</x:String>
+            <x:String>Egypt</x:String>
+            <x:String>El Salvador</x:String>
+            <x:String>Equatorial Guinea</x:String>
+            <x:String>Eritrea</x:String>
+            <x:String>Estonia</x:String>
+            <x:String>Eswatini (fmr. "Swaziland")</x:String>
+            <x:String>Ethiopia</x:String>
+            <x:String>Fiji</x:String>
+            <x:String>Finland</x:String>
+            <x:String>France</x:String>
+            <x:String>Gabon</x:String>
+            <x:String>Gambia</x:String>
+            <x:String>Georgia</x:String>
+            <x:String>Germany</x:String>
+            <x:String>Ghana</x:String>
+            <x:String>Greece</x:String>
+            <x:String>Grenada</x:String>
+            <x:String>Guatemala</x:String>
+            <x:String>Guinea</x:String>
+            <x:String>Guinea-Bissau</x:String>
+            <x:String>Guyana</x:String>
+            <x:String>Haiti</x:String>
+            <x:String>Honduras</x:String>
+            <x:String>Hungary</x:String>
+            <x:String>Iceland</x:String>
+            <x:String>India</x:String>
+            <x:String>Indonesia</x:String>
+            <x:String>Iran</x:String>
+            <x:String>Iraq</x:String>
+            <x:String>Ireland</x:String>
+            <x:String>Israel</x:String>
+            <x:String>Italy</x:String>
+            <x:String>Jamaica</x:String>
+            <x:String>Japan</x:String>
+            <x:String>Jordan</x:String>
+            <x:String>Kazakhstan</x:String>
+            <x:String>Kenya</x:String>
+            <x:String>Kiribati</x:String>
+            <x:String>Kosovo</x:String>
+            <x:String>Kuwait</x:String>
+            <x:String>Kyrgyzstan</x:String>
+            <x:String>Laos</x:String>
+            <x:String>Latvia</x:String>
+            <x:String>Lebanon</x:String>
+            <x:String>Lesotho</x:String>
+            <x:String>Liberia</x:String>
+            <x:String>Libya</x:String>
+            <x:String>Liechtenstein</x:String>
+            <x:String>Lithuania</x:String>
+            <x:String>Luxembourg</x:String>
+            <x:String>Madagascar</x:String>
+            <x:String>Malawi</x:String>
+            <x:String>Malaysia</x:String>
+            <x:String>Maldives</x:String>
+            <x:String>Mali</x:String>
+            <x:String>Malta</x:String>
+            <x:String>Marshall Islands</x:String>
+            <x:String>Mauritania</x:String>
+            <x:String>Mauritius</x:String>
+            <x:String>Mexico</x:String>
+            <x:String>Micronesia</x:String>
+            <x:String>Moldova</x:String>
+            <x:String>Monaco</x:String>
+            <x:String>Mongolia</x:String>
+            <x:String>Montenegro</x:String>
+            <x:String>Morocco</x:String>
+            <x:String>Mozambique</x:String>
+            <x:String>Myanmar (formerly Burma)</x:String>
+            <x:String>Namibia</x:String>
+            <x:String>Nauru</x:String>
+            <x:String>Nepal</x:String>
+            <x:String>Netherlands</x:String>
+            <x:String>New Zealand</x:String>
+            <x:String>Nicaragua</x:String>
+            <x:String>Niger</x:String>
+            <x:String>Nigeria</x:String>
+            <x:String>North Korea</x:String>
+            <x:String>Northern Macedonia</x:String>
+            <x:String>Norway</x:String>
+            <x:String>Oman</x:String>
+            <x:String>Pakistan</x:String>
+            <x:String>Palau</x:String>
+            <x:String>Palestine State</x:String>
+            <x:String>Panama</x:String>
+            <x:String>Papua New Guinea</x:String>
+            <x:String>Paraguay</x:String>
+            <x:String>Peru</x:String>
+            <x:String>Philippines</x:String>
+            <x:String>Poland</x:String>
+            <x:String>Portugal</x:String>
+            <x:String>Qatar</x:String>
+            <x:String>Romania</x:String>
+            <x:String>Russia</x:String>
+            <x:String>Rwanda</x:String>
+            <x:String>Saint Kitts and Nevis</x:String>
+            <x:String>Saint Lucia</x:String>
+            <x:String>Saint Vincent and the Grenadines</x:String>
+            <x:String>Samoa</x:String>
+            <x:String>San Marino</x:String>
+            <x:String>Sao Tome and Principe</x:String>
+            <x:String>Saudi Arabia</x:String>
+            <x:String>Senegal</x:String>
+            <x:String>Serbia</x:String>
+            <x:String>Seychelles</x:String>
+            <x:String>Sierra Leone</x:String>
+            <x:String>Singapore</x:String>
+            <x:String>Slovakia</x:String>
+            <x:String>Slovenia</x:String>
+            <x:String>Solomon Islands</x:String>
+            <x:String>Somalia</x:String>
+            <x:String>South Africa</x:String>
+            <x:String>South Korea</x:String>
+            <x:String>South Sudan</x:String>
+            <x:String>Spain</x:String>
+            <x:String>Sri Lanka</x:String>
+            <x:String>Sudan</x:String>
+            <x:String>Suriname</x:String>
+            <x:String>Sweden</x:String>
+            <x:String>Switzerland</x:String>
+            <x:String>Syria</x:String>
+            <x:String>Tajikistan</x:String>
+            <x:String>Tanzania</x:String>
+            <x:String>Thailand</x:String>
+            <x:String>Timor-Leste</x:String>
+            <x:String>Togo</x:String>
+            <x:String>Tonga</x:String>
+            <x:String>Trinidad and Tobago</x:String>
+            <x:String>Tunisia</x:String>
+            <x:String>Turkey</x:String>
+            <x:String>Turkmenistan</x:String>
+            <x:String>Tuvalu</x:String>
+            <x:String>Uganda</x:String>
+            <x:String>Ukraine</x:String>
+            <x:String>United Arab Emirates</x:String>
+            <x:String>United Kingdom</x:String>
+            <x:String>United States of America</x:String>
+            <x:String>Uruguay</x:String>
+            <x:String>Uzbekistan</x:String>
+            <x:String>Vanuatu</x:String>
+            <x:String>Vatican City</x:String>
+            <x:String>Venezuela</x:String>
+            <x:String>Vietnam</x:String>
+            <x:String>Yemen</x:String>
+            <x:String>Zambia</x:String>
+            <x:String>Zimbabwe</x:String>
+        </x:Array>
+    </ContentPage.Resources>
+
+    <StackLayout Margin="20" VerticalOptions="CenterAndExpand">
+        <Label Text="Select Country" FontSize="21" HorizontalOptions="Center" Margin="0,20,0,0"/>
+        <Picker x:Name="pickerCountry"
+                ItemsSource="{StaticResource CountryArray}"
+                HorizontalOptions="CenterAndExpand"
+                Margin="0,20,0,0"
+                FontSize="21"/>
+
+        <Label Text="Select Age" FontSize="21" HorizontalOptions="Center" Margin="0,20,0,0"/>
+        <Picker x:Name="pickerAge" HorizontalOptions="CenterAndExpand" Margin="0,20,0,0" FontSize="21">
+            <Picker.ItemsSource>
+            <x:Array Type="{x:Type x:Int32}">
+                <x:Int32>0</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>2</x:Int32>
+                <x:Int32>3</x:Int32>
+                <x:Int32>4</x:Int32>
+                <x:Int32>5</x:Int32>
+                <x:Int32>6</x:Int32>
+                <x:Int32>7</x:Int32>
+                <x:Int32>8</x:Int32>
+                <x:Int32>9</x:Int32>
+                <x:Int32>10</x:Int32>
+                <x:Int32>11</x:Int32>
+                <x:Int32>12</x:Int32>
+                <x:Int32>13</x:Int32>
+                <x:Int32>14</x:Int32>
+                <x:Int32>15</x:Int32>
+                <x:Int32>16</x:Int32>
+                <x:Int32>17</x:Int32>
+                <x:Int32>18</x:Int32>
+                <x:Int32>19</x:Int32>
+                <x:Int32>20</x:Int32>
+                <x:Int32>21</x:Int32>
+                <x:Int32>22</x:Int32>
+                <x:Int32>23</x:Int32>
+                <x:Int32>24</x:Int32>
+                <x:Int32>25</x:Int32>
+                <x:Int32>26</x:Int32>
+                <x:Int32>27</x:Int32>
+                <x:Int32>28</x:Int32>
+                <x:Int32>29</x:Int32>
+                <x:Int32>30</x:Int32>
+                <x:Int32>31</x:Int32>
+                <x:Int32>32</x:Int32>
+                <x:Int32>33</x:Int32>
+                <x:Int32>34</x:Int32>
+                <x:Int32>35</x:Int32>
+                <x:Int32>36</x:Int32>
+                <x:Int32>37</x:Int32>
+                <x:Int32>38</x:Int32>
+                <x:Int32>39</x:Int32>
+                <x:Int32>40</x:Int32>
+                <x:Int32>41</x:Int32>
+                <x:Int32>42</x:Int32>
+                <x:Int32>43</x:Int32>
+                <x:Int32>44</x:Int32>
+                <x:Int32>45</x:Int32>
+                <x:Int32>46</x:Int32>
+                <x:Int32>47</x:Int32>
+                <x:Int32>48</x:Int32>
+                <x:Int32>49</x:Int32>
+                <x:Int32>50</x:Int32>
+                <x:Int32>51</x:Int32>
+                <x:Int32>52</x:Int32>
+                <x:Int32>53</x:Int32>
+                <x:Int32>54</x:Int32>
+                <x:Int32>55</x:Int32>
+                <x:Int32>56</x:Int32>
+                <x:Int32>57</x:Int32>
+                <x:Int32>58</x:Int32>
+                <x:Int32>59</x:Int32>
+                <x:Int32>60</x:Int32>
+                <x:Int32>61</x:Int32>
+                <x:Int32>62</x:Int32>
+                <x:Int32>63</x:Int32>
+                <x:Int32>64</x:Int32>
+                <x:Int32>65</x:Int32>
+                <x:Int32>66</x:Int32>
+                <x:Int32>67</x:Int32>
+                <x:Int32>68</x:Int32>
+                <x:Int32>69</x:Int32>
+                <x:Int32>70</x:Int32>
+                <x:Int32>71</x:Int32>
+                <x:Int32>72</x:Int32>
+                <x:Int32>73</x:Int32>
+                <x:Int32>74</x:Int32>
+                <x:Int32>75</x:Int32>
+                <x:Int32>76</x:Int32>
+                <x:Int32>77</x:Int32>
+                <x:Int32>78</x:Int32>
+                <x:Int32>79</x:Int32>
+                <x:Int32>80</x:Int32>
+                <x:Int32>81</x:Int32>
+                <x:Int32>82</x:Int32>
+                <x:Int32>83</x:Int32>
+                <x:Int32>84</x:Int32>
+                <x:Int32>85</x:Int32>
+                <x:Int32>86</x:Int32>
+                <x:Int32>87</x:Int32>
+                <x:Int32>88</x:Int32>
+                <x:Int32>89</x:Int32>
+                <x:Int32>90</x:Int32>
+                <x:Int32>91</x:Int32>
+                <x:Int32>92</x:Int32>
+                <x:Int32>93</x:Int32>
+                <x:Int32>94</x:Int32>
+                <x:Int32>95</x:Int32>
+                <x:Int32>96</x:Int32>
+                <x:Int32>97</x:Int32>
+                <x:Int32>98</x:Int32>
+                <x:Int32>99</x:Int32>
+                <x:Int32>100</x:Int32>
+            </x:Array>
+        </Picker.ItemsSource>
+        </Picker>
+
+    <Button Text="Confirm" Clicked="ClosePopupButton_Clicked"
+            HorizontalOptions="Center" Margin="0,20,0,0" />
+
+
+    </StackLayout>
+</ContentPage>

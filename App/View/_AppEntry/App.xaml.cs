@@ -8,7 +8,7 @@ public partial class App : Application, INotifyPropertyChanged
 	{
 		InitializeComponent();
 
-		MainPage = new NavigationPage(new AppShell(false, false, false));
+		MainPage = new SliderAgeRegion();
 
     }
 }
