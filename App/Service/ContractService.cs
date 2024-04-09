@@ -14,7 +14,7 @@ namespace App.Service
             _contractRepository = contractRepository;
         }
 
-        public void CreateConract(List<Client> clients, Song song)
+        public void CreateContract(List<Client> clients, Song song)
         {    
             try
             {
