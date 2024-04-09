@@ -43,7 +43,7 @@ namespace App.Repository
 
         public override bool Update(Contract contract)
         {
-            
+
             return true;
         }
 
@@ -69,15 +69,12 @@ namespace App.Repository
             using (SqlConnection connection = new SqlConnection(this._connectionString))
             {
                 connection.Open();
-                
-                
 
-
-                string query = @"SELECT c.Id, client.*, song.*
+                string query = @"SELECT c.id, client.id, s.id
                          FROM Contract c
-                         INNER JOIN ContractUser cu ON c.Id = cu.ContractId
-                         INNER JOIN [Client] client ON cu.ClientId = client.Id
-                         INNER JOIN Song s on c.SongId = s.Id
+                         INNER JOIN ContractUser cu ON c.id = cu.contractId
+                         INNER JOIN [Client] client ON cu.clientId = client.Id
+                         INNER JOIN Song s on c.songId = s.id
                          WHERE c.Id = @ContractId";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -93,64 +90,12 @@ namespace App.Repository
                             {
                                 int songId = (int)reader["s.id"];
 
-                                int songTitleOrdinal = reader.GetOrdinal("s.title");
-                                var songTitle = reader.IsDBNull(songTitleOrdinal) ? null : reader.GetString(songTitleOrdinal);
-
-                                int songDurationOrdinal = reader.GetOrdinal("s.duration");
-                                var songDuration = reader.IsDBNull(songDurationOrdinal) ? -1 : reader.GetInt32(songDurationOrdinal);
-
-                                int songTimesPlayedOrdinal = reader.GetOrdinal("s.timesPlayed");
-                                var songTimesPlayed = reader.IsDBNull(songTimesPlayedOrdinal) ? -1 : reader.GetInt32(songTimesPlayedOrdinal);
-
-                                int songArtistOrdinal = reader.GetOrdinal("s.artist");
-                                var songArtist = reader.IsDBNull(songArtistOrdinal) ? null : reader.GetString(songArtistOrdinal);
-
-                                int songAlbumOrdinal = reader.GetOrdinal("s.album");
-                                var songAlbum = reader.IsDBNull(songAlbumOrdinal) ? null : reader.GetString(songAlbumOrdinal);
-
-                                int songRestrictionsOrdinal = reader.GetOrdinal("s.restrictions");
-                                var songRestrictionsString = reader.IsDBNull(songRestrictionsOrdinal) ? null : reader.GetString(songRestrictionsOrdinal);
-                                var songRestrictions = Song.getRestrictionsFromString(songRestrictionsString);
-
-                                int songLikesOrdinal = reader.GetOrdinal("s.likes");
-                                var songLikes = reader.IsDBNull(songLikesOrdinal) ? -1 : reader.GetInt32(songLikesOrdinal);
-
-                                int songSharesOrdinal = reader.GetOrdinal("s.shares");
-                                var songShares = reader.IsDBNull(songSharesOrdinal) ? -1 : reader.GetInt32(songSharesOrdinal);
-
-                                int songSavesOrdinal = reader.GetOrdinal("s.saves");
-                                var songSaves = reader.IsDBNull(songSavesOrdinal) ? -1 : reader.GetInt32(songSavesOrdinal);
-                                
-                                song = new Song(songId, songTitle, songArtist, songAlbum, songRestrictions, songDuration, songTimesPlayed, songLikes, songShares, songSaves);
+                                song = new SongRepository(_connectionString).getById(songId);
                             }
 
                             int clientId = (int)reader["client.id"];
-                            
-                            int clientUsernameOrdinal = reader.GetOrdinal("client.username");
-                            var clientUsername = reader.IsDBNull(clientUsernameOrdinal) ? null : reader.GetString(clientUsernameOrdinal);
 
-                            var clientPasswordOrdinal = reader.GetOrdinal("client.password");
-                            var clientPassword = reader.IsDBNull(clientPasswordOrdinal) ? null : reader.GetString(clientPasswordOrdinal);
-
-                            var clientEmailOrdinal = reader.GetOrdinal("client.email");
-                            var clientEmail = reader.IsDBNull(clientEmailOrdinal) ? null : reader.GetString(clientEmailOrdinal);
-
-                            var clientPhoneOrdinal = reader.GetOrdinal("client.phone");
-                            var clientPhone = reader.IsDBNull(clientPhoneOrdinal) ? null : reader.GetString(clientPhoneOrdinal);
-
-                            var clientSaltOrdinal = reader.GetOrdinal("client.salt");
-                            var clientSalt = reader.IsDBNull(clientSaltOrdinal) ? null : reader.GetString(clientSaltOrdinal);
-
-                            var clientCompanyNameOrdinal = reader.GetOrdinal("client.companyName");
-                            var clientCompanyName = reader.IsDBNull(clientCompanyNameOrdinal) ? null : reader.GetString(clientCompanyNameOrdinal);
-
-                            var clientContactEmailOrdinal = reader.GetOrdinal("client.contactEmail");
-                            var clientContactEmail = reader.IsDBNull(clientContactEmailOrdinal) ? null : reader.GetString(clientContactEmailOrdinal);
-
-                            var clientBusinessEmailOrdinal = reader.GetOrdinal("client.businessEmail");
-                            var clientBusinessEmail = reader.IsDBNull(clientBusinessEmailOrdinal) ? null : reader.GetString(clientBusinessEmailOrdinal);
-
-                            var client = new Client(clientId, clientUsername, clientPassword, clientEmail, clientPhone, clientSalt, clientCompanyName, clientContactEmail, clientBusinessEmail);
+                            Client client = new ClientRepository(_connectionString).getById(clientId); 
 
                             
                             clients.Add(client);
@@ -162,6 +107,42 @@ namespace App.Repository
             Contract contract = new Contract(contractId, clients, song);
 
             return contract;
+        }
+
+        public bool AddClientToContract(int contractId, int clientId)
+        {
+            using (SqlConnection connection = new SqlConnection(this._connectionString))
+            {
+                connection.Open();
+
+                string query = @"INSERT INTO ContractUser (contractId, clientId) VALUES (@ContractId, @ClientId)";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ContractId", contractId);
+                    command.Parameters.AddWithValue("@ClientId", clientId);
+
+                    return command.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public bool RemoveClientFromContract(int contractId, int clientId)
+        {
+            using (SqlConnection connection = new SqlConnection(this._connectionString))
+            {
+                connection.Open();
+
+                string query = @"DELETE FROM ContractUser WHERE contractId = @ContractId AND clientId = @ClientId";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ContractId", contractId);
+                    command.Parameters.AddWithValue("@ClientId", clientId);
+
+                    return command.ExecuteNonQuery() > 0;
+                }
+            }
         }
     }
 }

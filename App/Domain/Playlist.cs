@@ -4,11 +4,16 @@ namespace App.Domain
 {
     public class Playlist
     {
-        private int id { get; }
-        private List<Song> songs { get; set; }
-        private string name { get; set; } = string.Empty;
+        public int id { get; }
+        public List<Song> songs { get; set; }
+        public string name { get; set; } = string.Empty;
 
         public Playlist(string name)
+        {
+            this.name = name;
+        }
+
+        public Playlist(int id, string name)
         {
             this.name = name;
         }

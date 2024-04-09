@@ -4,9 +4,9 @@ namespace App.Domain
 {
     public abstract class Playable
     {
-        protected int id { get; } = new int();
-        protected int duration { get; set; } = new int();
-        protected int timesPlayed { get; set; } = new int();
+        public int id { get; } = new int();
+        public int duration { get; set; } = new int();
+        public int timesPlayed { get; set; } = new int();
 
         protected Playable()
         {

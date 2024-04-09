@@ -6,13 +6,13 @@ namespace App.Domain
 {
     public class Song : Playable
     {
-        private string title { get; set; } = string.Empty;
-        private string artist { get; set; } = string.Empty;
-        private string album { get; set; } = string.Empty;
-        private int likes { get; set; }
-        private int shares { get; set; }
-        private int saves { get; set; }
-        private List<String> restrictions { get; set; }
+        public string title { get; set; } = string.Empty;
+        public string artist { get; set; } = string.Empty;
+        public string album { get; set; } = string.Empty;
+        public int likes { get; set; }
+        public int shares { get; set; }
+        public int saves { get; set; }
+        public List<String> restrictions { get; set; }
 
         public Song(string title, string artist, string album, List<String> restrictions, int duration) : base()
         {
