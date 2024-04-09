@@ -33,6 +33,7 @@ namespace ISSProject
         {
             IsLoggedInSub.IsVisible = IsLoggedIn;
             IsLoggedInShow.IsVisible = !IsLoggedIn;
+            IsAClientCont.IsVisible = IsAClient;
             IsAClientSub.IsVisible = IsAClient;
             IsAdminSub.IsVisible = IsAdmin;
 
