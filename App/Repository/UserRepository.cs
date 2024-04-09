@@ -1,3 +1,4 @@
+using System;
 using App.Repository;
 using App.Domain.User;
 
@@ -5,7 +6,6 @@ namespace App.Repository
 {
     public class UserRepository : EntityRepository<User>
     {
-        // string username, string password, string email, string phone, string zone, string salt, string location, int age, string subscriptionTier, Guid guid
 
         public UserRepository(string connectionString) : base(connectionString)
         {
@@ -13,8 +13,8 @@ namespace App.Repository
 
         public override User getById(int id)
         {
-            var query = "SELECT * FROM Users WHERE Id = @Id";
-            var parameters = new SqlParameter[] { new SqlParameter("@Id", id) };
+            var query = "SELECT * FROM Users WHERE id = @id";
+            var parameters = new SqlParameter[] { new SqlParameter("@id", id) };
             return ExecuteQuery(query, UserMapper, parameters).FirstOrDefault();
         }
 
@@ -29,7 +29,7 @@ namespace App.Repository
             var query = "INSERT INTO Users (id ,username, password, email, phone, zone, salt, location, age, subscribtionTier) VALUES (@id ,@username, @password, @email, @phone, @zone, @salt, @location, @age, @subscriptionTier)";
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@id", user.Id),
+                new SqlParameter("@id", user.id),
                 new SqlParameter("@username", user.username),
                 new SqlParameter("@password", user.password),
                 new SqlParameter("@email", user.email),
@@ -46,10 +46,10 @@ namespace App.Repository
 
         public override bool Update(User user)
         {
-            var query = "UPDATE Users SET username = @username, password = @password, email = @email, phone = @phone, zone = @zone, salt = @salt, location = @location, age = @age, subscriptionTier = @subscriptionTier WHERE Id = @Id";
+            var query = "UPDATE Users SET username = @username, password = @password, email = @email, phone = @phone, zone = @zone, salt = @salt, location = @location, age = @age, subscriptionTier = @subscriptionTier WHERE id = @id";
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@Id", user.Id),
+                new SqlParameter("@id", user.id),
                 new SqlParameter("@username", user.username),
                 new SqlParameter("@password", user.password),
                 new SqlParameter("@email", user.email),
@@ -66,45 +66,26 @@ namespace App.Repository
 
         public override bool Delete(User user)
         {
-            var query = "DELETE FROM Users WHERE Id = @Id";
-            var parameters = new SqlParameter[] { new SqlParameter("@Id", user.Id) };
+            var query = "DELETE FROM Users WHERE id = @id";
+            var parameters = new SqlParameter[] { new SqlParameter("@id", user.id) };
             return ExecuteNonQuery(query, parameters);
         }
 
-        public static User UserMapper(IDataReader reader)
+        public static User Mapper(IDataReader reader)
         {
-            User user = new User();
+            int id = (int)reader["id"];
 
-            user.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+            string username = GetStringOrNull(reader, "username");
+            string password = GetStringOrNull(reader, "password");
+            string email = GetStringOrNull(reader, "email");
+            string phone = GetStringOrNull(reader, "phone");
+            string zone = GetStringOrNull(reader, "zone");
+            string salt = GetStringOrNull(reader, "salt");
+            string location = GetStringOrNull(reader, "location");
+            int age = (int)reader["age"];
+            int subscriptionTier = (int)reader["subscriptionTier"];
 
-            int usernameOrdinal = reader.GetOrdinal("username");
-            user.username = reader.IsDBNull(usernameOrdinal) ? null : reader.GetString(usernameOrdinal);
-
-            int passwordOrdinal = reader.GetOrdinal("password");
-            user.password = reader.IsDBNull(passwordOrdinal) ? null : reader.GetString(passwordOrdinal);
-
-            int emailOrdinal = reader.GetOrdinal("email");
-            user.email = reader.IsDBNull(emailOrdinal) ? null : reader.GetString(emailOrdinal);
-
-            int phoneOrdinal = reader.GetOrdinal("phone");
-            user.phone = reader.IsDBNull(phoneOrdinal) ? null : reader.GetString(phoneOrdinal);
-
-            int zoneOrdinal = reader.GetOrdinal("zone");
-            user.zone = reader.IsDBNull(zoneOrdinal) ? null : reader.GetString(zoneOrdinal);
-
-            int saltOrdinal = reader.GetOrdinal("salt");
-            user.salt = reader.IsDBNull(saltOrdinal) ? null : reader.GetString(saltOrdinal);
-
-            int locationOrdinal = reader.GetOrdinal("location");
-            user.location = reader.IsDBNull(locationOrdinal) ? null : reader.GetString(locationOrdinal);
-
-            int ageOrdinal = reader.GetOrdinal("age");
-            user.age = reader.GetInt32(ageOrdinal);
-
-            int subscriptionTierOrdinal = reader.GetOrdinal("subscriptionTier");
-            user.subscriptionTier = reader.IsDBNull(subscriptionTierOrdinal) ? (int?)null : reader.GetInt32(subscriptionTierOrdinal);
-
-            return user;
+            return new User(id, username, password, email, phone, zone, salt, location, age, subscriptionTier);
         }
     }
 }

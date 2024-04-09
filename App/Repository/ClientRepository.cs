@@ -1,3 +1,4 @@
+using System;
 using App.Repository.EntityRepository;
 using App.Domain.Client;
 
@@ -5,7 +6,7 @@ namespace App.Repository
 {
 	public class ClientRepository : EntityRepository<Client>
 	{
-		// id, username, password, phone, zone, salt, companyName, contactEmail, businessEmail,
+		
 
 		public ClientRepository(string connectionString) : base(connectionString)
 		{
@@ -73,39 +74,19 @@ namespace App.Repository
 
 		public static Client ClientMapper(IDataReader reader)
 		{
-			Client user = new Client();
+			int id = (int)reader["id"];
 
-			user.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+			string username = GetStringOrNull(reader, "username");
+			string password = GetStringOrNull(reader, "password");
+			string email = GetStringOrNull(reader, "email");
+			string phone = GetStringOrNull(reader, "phone");
+			string zone = GetStringOrNull(reader, "zone");
+			string salt = GetStringOrNull(reader, "salt");
+			string companyName = GetStringOrNull(reader, "companyName");
+			string contactEmail = GetStringOrNull(reader, "contactEmail");
+			string businessEmail = GetStringOrNull(reader, "businessEmail");
 
-			int nameOrdinal = reader.GetOrdinal("name");
-			client.username = reader.IsDBNull(usernameOrdinal) ? null : reader.GetString(usernameOrdinal);
-
-			int passwordOrdinal = reader.GetOrdinal("password");
-			client.password = reader.IsDBNull(passwordOrdinal) ? null : reader.GetString(passwordOrdinal);
-
-			int emailOrdinal = reader.GetOrdinal("email");
-			client.email = reader.IsDBNull(emailOrdinal) ? null : reader.GetString(emailOrdinal);
-
-			int phoneOrdinal = reader.GetOrdinal("phone");
-			client.phone = reader.IsDBNull(phoneOrdinal) ? null : reader.GetString(phoneOrdinal);
-
-			int zoneOrdinal = reader.GetOrdinal("zone");
-			client.zone = reader.IsDBNull(zoneOrdinal) ? null : reader.GetString(zoneOrdinal);
-
-			int saltOrdinal = reader.GetOrdinal("salt");
-			client.salt = reader.IsDBNull(saltOrdinal) ? null : reader.GetString(saltOrdinal);
-
-			int comapnyNameOrdinal = reader.GetOrdinal("companyName");
-			client.companyName = reader.IsDBNull(comapnyNameOrdinal) ? null : reader.GetString(comapnyNameOrdinal);
-
-			int contactEmailOrdinal = reader.GetOrdinal("contactEmail");
-			client.contactEmail = reader.IsDBNull(contactEmailOrdinal) ? null : reader.GetString(contactEmailOrdinal);
-
-			int businessEmailOrdinal = reader.GetOrdinal("businessEmail");
-			client.businessEmail = reader.IsDBNull(businessEmailOrdinal) ? null : reader.GetString(businessEmailOrdinal);
-
-
-			return client;
+			return new Client(id, username, password, email, phone, zone, salt, companyName, contactEmail, businessEmail);	
 		}
 	}
 }

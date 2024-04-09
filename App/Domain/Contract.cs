@@ -15,6 +15,12 @@ namespace App.Domain
             this.id = id;
         }
 
+        Contract(int id, Song song)
+        {
+            this.id = id;
+            this.song = song;
+        }
+
         Contract(int id, List<Client> clients, Song song)
         {
             //Constructor with all the attributes

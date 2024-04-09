@@ -1,3 +1,4 @@
+using System;
 using App.Repository.EntityRepository;
 using App.Domain.Contract;
 
@@ -49,9 +50,10 @@ namespace App.Repository
 
         public static Contract ContractMapper(IDataReader reader)
         {
+
             return new Contract
             {
-                Id = (Guid)reader["Id"],
+                id = reader.GetInt32(reader.GetOrdinal("id")),
             };
         }
 

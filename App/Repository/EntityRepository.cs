@@ -56,6 +56,12 @@ namespace App.Repository
             }
         }
 
+        protected static string GetStringOrNull(IDataReader reader, string columnName)
+        {
+            int ordinal = reader.GetOrdinal(columnName);
+            return reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
+        }
+
         public abstract T getById(int id);
         public abstract List<T> getAll();
         public abstract bool Add(T entity);
