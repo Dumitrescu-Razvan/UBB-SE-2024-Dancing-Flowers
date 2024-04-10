@@ -1,8 +1,13 @@
+using System;
+using App.Service;
+
 namespace ISSProject
 {
     public partial class CreateAccPage : ContentPage
     {
         private bool _client;
+
+        private Service service = new Service();
         public bool Client
         {
             get => _client;
@@ -54,10 +59,10 @@ namespace ISSProject
             Client = e.Value;
         }
         // Dummy validation method, replace with your actual validation logic
-        private bool IsValidCreateAcc(bool client, string email, string username, string password, string confirmPassword)
+        private bool IsValidCreateAcc(bool client, string email, string username, string password, string confirmPassword, string location, int age)
         {
-            // Dummy check, replace with your actual validation logic
-            return email == "admin" && username == "admin" && password == "password" && confirmPassword == "password" && client == true;
+            service.CreateAccount(email, username, password, confirmPassword, client, location,age ); //TODO get location and age
+            
         }
         private async void BackButton_Clicked(object sender, EventArgs e)
         {

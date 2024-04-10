@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using App.Service;
 
 namespace ISSProject
 {
@@ -8,6 +9,8 @@ namespace ISSProject
     {
         public ObservableCollection<string> Songs { get; set; }
         public ObservableCollection<string> TopThreeArtists { get; set; }
+
+        public Service service = new Service();
 
         // Constructor
         public SongPage()
@@ -23,11 +26,7 @@ namespace ISSProject
         // Method to load sample songs (replace with your actual data source)
         private void LoadSongs()
         {
-            Songs.Add("Song 1 by Artist 1");
-            Songs.Add("Song 2 by Artist 1");
-            Songs.Add("Song 3 by Artist 2");
-            Songs.Add("Song 4 by Artist 3");
-            Songs.Add("Song 5 by Artist 3");
+            Songs = service.GetSongs();
             Songs.CollectionChanged += Songs_CollectionChanged;
         }
 

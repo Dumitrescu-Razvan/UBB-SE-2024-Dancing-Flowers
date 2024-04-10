@@ -8,26 +8,34 @@ using App.Service;
 using App.Domain;
 using App.Repository;
 using System.Collections.ObjectModel;
+using ISSProject;
 
 namespace App.Service
 {
     internal class Service
     {
+        private static string connectionString = "Data Source=DESKTOP-IO9FIG6\\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;TrustServerCertificate=True";
+        private SongRepository songRepo;
+        private ClientRepository clientRepo;
+        private UserRepository userRepo;
+
         private readonly SongService _songService;
         private readonly ClientService _clientService;
         private readonly Admin _admin;
         private readonly UserService _userService;
-        private readonly UserRepository _userRepository;
-        private readonly ClientRepository _clientRepository;
 
         private Account activeUser;
 
-        public Service(SongService songService, ClientService clientService, Admin admin, UserService userService)
+        public Service()
         {
-            _songService = songService;
-            _clientService = clientService;
-            _admin = admin;
-            _userService = userService;
+            songRepo = new SongRepository(connectionString);
+            clientRepo = new ClientRepository(connectionString);
+            userRepo = new UserRepository(connectionString);
+            _songService = new SongService(songRepo);
+            _clientService = new ClientService(clientRepo);
+            _admin = new Admin();
+            _userService = new UserService(userRepo);
+
         }
         public void CreateAccount(string email, string username, string password, string confirmPassword, bool isClient)
         {
@@ -43,8 +51,9 @@ namespace App.Service
 
         public bool Login(string username, string password)
         {
-            var user = _userRepository.getByUsername(username);
-            var client = _clientRepository.getByUsername(username);
+            var user = userRepo.getByUsername(username);
+            var client = clientRepo.getByUsername(username);
+
             if (user == null && client == null)
             {
 
@@ -74,7 +83,19 @@ namespace App.Service
             }
 
         }
-        public ObservableCollection<string> getSongs()
+
+        public bool CreateAccount(string email, string username, string password, string confirmPassword, bool isClient, string location, int age, string artistName)
+        {
+            if (isClient)
+            {
+                return _clientService.CreateAccount(email, username, password, confirmPassword,artistName);
+            }
+            else
+            {
+                return _userService.CreateAccount(email, username, password, confirmPassword, location, age);
+            }
+        }
+        public ObservableCollection<string> GetSongs()
         {
             return _songService.getSongs();
         }

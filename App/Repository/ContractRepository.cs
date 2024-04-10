@@ -74,51 +74,6 @@ namespace App.Repository
             return contract;
         }
 
-        /*public Contract GetContractWithClientsAndSong(int contractId)
-        {
-            
-            Song song = null;
-
-            using (SqlConnection connection = new SqlConnection(this._connectionString))
-            {
-                connection.Open();
-
-                string query = @"SELECT c.id, client.id, s.id
-                         FROM Contract c
-                         INNER JOIN ContractUser cu ON c.id = cu.contractId
-                         INNER JOIN [Client] client ON cu.clientId = client.Id
-                         INNER JOIN Song s on c.songId = s.id
-                         WHERE c.Id = @ContractId";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@ContractId", contractId);
-                    
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            if(song == null)
-                            {
-                                int songId = (int)reader["s.id"];
-
-                                song = new SongRepository(_connectionString).getById(songId);
-                            }
-
-                            int clientId = (int)reader["client.id"];
-
-                            Client client = new ClientRepository(_connectionString).getById(clientId); 
-
-                        }
-                    }
-                }
-            }
-
-            Contract contract = new Contract(client1,client2, song);
-
-            return contract;
-        }*/
 
         public bool AddClientToContract(int contractId, int clientId)
         {
