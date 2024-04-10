@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using App.Service;
 using App.Domain;
 using App.Repository;
@@ -12,9 +11,9 @@ using ISSProject;
 
 namespace App.Service
 {
-    internal class Service
+    public class Service
     {
-        private static string connectionString = "Data Source=DESKTOP-IO9FIG6\\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;TrustServerCertificate=True";
+        private static string connectionString = "Server=172.30.242.1;Database=Music;User Id=SA;Password=Password123;TrustServerCertificate=true";
         private SongRepository songRepo;
         private ClientRepository clientRepo;
         private UserRepository userRepo;
@@ -84,7 +83,7 @@ namespace App.Service
 
         }
 
-        public bool CreateAccount(string email, string username, string password, string confirmPassword, bool isClient, string location, int age, string artistName)
+        public bool CreateAccount(string email, string username, string password, string confirmPassword, bool isClient, string location, int age, string artistName = "")
         {
             if (isClient)
             {
@@ -94,6 +93,7 @@ namespace App.Service
             {
                 return _userService.CreateAccount(email, username, password, confirmPassword, location, age);
             }
+
         }
         public ObservableCollection<string> GetSongs()
         {
