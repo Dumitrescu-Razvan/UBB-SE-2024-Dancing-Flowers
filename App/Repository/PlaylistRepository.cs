@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using App.Domain;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using App.Repository;
 
 namespace App.Repository

@@ -59,10 +59,10 @@ namespace ISSProject
             Client = e.Value;
         }
         // Dummy validation method, replace with your actual validation logic
-        private bool IsValidCreateAcc(bool client, string email, string username, string password, string confirmPassword, string location, int age)
+        private bool IsValidCreateAcc(bool client, string email, string username, string password, string confirmPassword)
         {
-            service.CreateAccount(email, username, password, confirmPassword, client, location,age ); //TODO get location and age
-            
+           return service.CreateAccount(email, username, password, confirmPassword, client, "", 18 ); //TODO get location and age
+             
         }
         private async void BackButton_Clicked(object sender, EventArgs e)
         {

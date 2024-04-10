@@ -17,6 +17,7 @@ namespace App.Service
 		}
         public ObservableCollection<string> getSongs() { 
 			List<Song> songs = _songRepository.getAll();
+			Console.WriteLine("Is good");
 			ObservableCollection<string> songNames = new ObservableCollection<string>();
 			foreach (Song song in songs)
 			{
