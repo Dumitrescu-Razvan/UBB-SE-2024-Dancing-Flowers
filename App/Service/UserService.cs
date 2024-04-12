@@ -30,11 +30,12 @@ namespace App.Service
             return true;    
         }
 
-        public bool CreateAccount(string email, string username, string password, string confirmPassword,string location, int age)
+        public bool CreateAccount(string email, string username, string password, string confirmPassword, string location, int age)
         {
             if (IsValidCreateAcc(email, username, password, confirmPassword))
             {
-                var user = new User(1,username,password,email,"",location,age,"bronz",false);
+                var user = new User(1, username, password, email, "", location, age, "bronze", false);
+                _userRepository.Add(user);
                 return true;
             }
             return false;

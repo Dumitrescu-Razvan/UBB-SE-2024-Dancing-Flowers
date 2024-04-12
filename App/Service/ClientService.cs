@@ -47,5 +47,17 @@ namespace App.Service
             var client = _clientRepository.getByUsername(_username);
             return client.passwordHash == client.hashPassword(_password, client.salt);
         }
+
+        public ObservableCollection<string> GetAllClients()
+        {
+            List<Client> clients = _clientRepository.getAll();
+            ObservableCollection<string> clientList = new ObservableCollection<string>();
+            foreach (var client in clients)
+            {
+                clientList.Add(client.artistName);
+
+            }
+            return clientList;
+        }
     }
 }

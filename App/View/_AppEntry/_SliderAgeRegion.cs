@@ -7,8 +7,8 @@ namespace ISSProject
 {
     public partial class SliderAgeRegion : ContentPage
     {
-        public string? SelectedCountry { get; set; }
-        public int SelectedAge { get; set; }
+        public static string? SelectedCountry { get; set; }
+        public static int SelectedAge { get; set; }
 
         public SliderAgeRegion()
         {

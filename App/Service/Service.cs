@@ -83,21 +83,32 @@ namespace App.Service
 
         }
 
-        public bool CreateAccount(string email, string username, string password, string confirmPassword, bool isClient, string location, int age, string artistName = "")
+        public bool CreateAccount(string email, string username, string password, string confirmPassword, bool isClient, string location = "", int age = 0, string artistName = "")
         {
             if (isClient)
             {
-                return _clientService.CreateAccount(email, username, password, confirmPassword,artistName);
+
+                _clientService.CreateAccount(email, username, password, confirmPassword, artistName);
+                return true;
+
             }
             else
             {
-                return _userService.CreateAccount(email, username, password, confirmPassword, location, age);
-            }
+                _userService.CreateAccount(email, username, password, confirmPassword, location, age);
+                return true;
 
+            }
+            return false;
         }
         public ObservableCollection<string> GetSongs()
         {
             return _songService.getSongs();
         }
+
+        public ObservableCollection<string> GetClients()
+        {
+            return _clientService.GetAllClients();
+        }
+
     }
 }

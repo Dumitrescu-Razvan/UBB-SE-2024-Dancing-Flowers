@@ -61,7 +61,7 @@ namespace ISSProject
         // Dummy validation method, replace with your actual validation logic
         private bool IsValidCreateAcc(bool client, string email, string username, string password, string confirmPassword)
         {
-           return service.CreateAccount(email, username, password, confirmPassword, client, "", 18 ); //TODO get location and age
+           return service.CreateAccount(email, username, password, confirmPassword, client, SliderAgeRegion.SelectedCountry, SliderAgeRegion.SelectedAge); //TODO get location and age
              
         }
         private async void BackButton_Clicked(object sender, EventArgs e)

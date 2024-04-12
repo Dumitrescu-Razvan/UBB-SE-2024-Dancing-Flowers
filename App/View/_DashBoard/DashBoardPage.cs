@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
+using App.Service;
 
 namespace ISSProject
 {
@@ -12,6 +13,8 @@ namespace ISSProject
         public ObservableCollection<string> StreamsLabelText { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> ClaimsLabelText { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> Artists { get; set; } = new ObservableCollection<string>();
+
+        public Service _service = new Service();
 
         public DashBoardPage()
         {
@@ -55,9 +58,7 @@ namespace ISSProject
             ClaimsLabelText.Add("Claims: 10");
 
             // Add sample artists
-            Artists.Add("Artist 1");
-            Artists.Add("Artist 2");
-            Artists.Add("Artist 3");
+            Artists = _service.GetClients();
         }
 
         private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
