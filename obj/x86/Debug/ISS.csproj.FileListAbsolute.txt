@@ -1,0 +1,3 @@
+C:\Users\Dumi\Documents\GitHub\UBB-SE-2024-Dancing-Flowers\obj\x86\Debug\ISS.csproj.AssemblyReference.cache
+C:\Users\Dumi\Documents\GitHub\UBB-SE-2024-Dancing-Flowers\obj\x86\Debug\ConsoleApplication_Content.g.cs
+C:\Users\Dumi\Documents\GitHub\UBB-SE-2024-Dancing-Flowers\obj\x86\Debug\ConsoleApplication_MarkupCompile.cache

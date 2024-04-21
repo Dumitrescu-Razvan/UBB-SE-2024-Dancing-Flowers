@@ -76,6 +76,9 @@
     <None Include=".git\packed-refs" />
     <None Include=".git\refs\heads\main" />
     <None Include=".git\refs\remotes\origin\HEAD" />
+    <None Include=".vscode\settings.json" />
+    <None Include=".vs\ISS\FileContentIndex\48a6658f-014b-4abd-943c-d257fe1cd95f.vsidx" />
+    <None Include=".vs\ISS\FileContentIndex\fe81bba6-042c-42c3-a5b2-43f8960459db.vsidx" />
     <None Include=".vs\ProjectSettings.json" />
     <None Include=".vs\slnx.sqlite" />
     <None Include=".vs\UBB-SE-2024-Dancing-Flowers\FileContentIndex\d2de6269-c4d6-4750-bdd4-8dc7ecadd527.vsidx" />
@@ -83,7 +86,10 @@
     <None Include=".vs\UBB-SE-2024-Dancing-Flowers\v17\DocumentLayout.json" />
     <None Include=".vs\VSWorkspaceState.json" />
     <None Include="app.config" />
+    <None Include="App\View\text" />
     <None Include="Diagrams\UseCase.mdj" />
+    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\x86\Debug\ISS.csproj.AssemblyReference.cache" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
@@ -111,16 +117,112 @@
     <Compile Include="App\Service\Service.cs" />
     <Compile Include="App\Service\SongService.cs" />
     <Compile Include="App\Service\UserService.cs" />
+    <Compile Include="App\View\_Admin\AdminPage.cs" />
+    <Compile Include="App\View\_AppEntry\App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\View\_AppEntry\MauiProgram.cs" />
+    <Compile Include="App\View\_AppEntry\_SliderAgeRegion.cs" />
+    <Compile Include="App\View\_AppShell\AppShell.xaml.cs">
+      <DependentUpon>AppShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\View\_ContractsPage\_ContractsPage.cs" />
+    <Compile Include="App\View\_DashBoard\DashBoardPage.cs" />
+    <Compile Include="App\View\_LoginPage\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\View\_LoginPage\_CreateAccPage\_CreateAccPage.cs" />
+    <Compile Include="App\View\_MainPage\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\View\_SongPage\SongPage.cs" />
+    <Compile Include="App\View\_SongPage\_SongDetailsPage\SongDetailsPage.cs" />
+    <Compile Include="App\View\_SubsPage\MySubscriptionPage.cs" />
+    <Compile Include="App\View\_SubsPage\SubscriptionManager.cs" />
+    <Compile Include="App\View\_SubsPage\SubscriptionsPage.cs" />
+    <Compile Include="App\View\_SubsPage\_PaymentPage\PaymentPage.cs" />
+    <Compile Include="obj\x86\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+    <Compile Include="obj\x86\Debug\ConsoleApplication_Content.g.i.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Diagrams\ClassDiagram.png" />
     <Content Include="Diagrams\Text.txt" />
     <Content Include="Diagrams\UseCaseDiagram.png" />
+    <Content Include="Folder.DotSettings.user" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".git\objects\info\" />
     <Folder Include=".git\refs\tags\" />
+    <Folder Include=".vs\ISS\v17\" />
+    <Folder Include="App\.vs\App\FileContentIndex\" />
+    <Folder Include="App\.vs\App\v17\" />
+    <Folder Include="App\.vs\ISS\FileContentIndex\" />
+    <Folder Include="App\.vs\ISS\v17\" />
+    <Folder Include="App\bin\Debug\" />
+    <Folder Include="App\bin\Release\" />
+    <Folder Include="App\obj\x86\Debug\TempPE\" />
+    <Folder Include="App\obj\x86\Release\" />
+    <Folder Include="bin\Debug\" />
+    <Folder Include="obj\x86\Debug\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="App\View\_Admin\AdminPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\View\_AppEntry\App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\View\_AppEntry\_SliderAgeRegion.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\View\_AppShell\AppShell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\View\_ContractsPage\_ContractsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\View\_DashBoard\DashBoardPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\View\_LoginPage\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\View\_LoginPage\_CreateAccPage\_CreateAccPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\View\_MainPage\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\View\_SongPage\SongPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\View\_SongPage\_SongDetailsPage\SongDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\View\_SubsPage\MySubscriptionPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\View\_SubsPage\SubscriptionsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\View\_SubsPage\_PaymentPage\PaymentPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
